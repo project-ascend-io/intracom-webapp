@@ -4,14 +4,14 @@ import Link from "next/link";
 export default function Home() {
   return (
     <section className="flex items-center justify-center mt-20">
-      <div className="w-full   ">
+      <div className="w-full  ">
+        {/* className="lg:ml-40 md:ml-30 */}
         <Image
-          className="lg:ml-40  md:ml-30"
-          src="/landingpage.jpeg"
+          className="w-full lg:ml-44 lg:w-1/2 md:ml-30"
+          src="/landingpage.png"
           alt="landing page"
-          width={300}
+          width={37}
           height={37}
-          priority
         />
       </div>
       <div className="w-full pr-[40px] lg:mr-40">
@@ -43,7 +43,7 @@ export default function Home() {
           </span>
         </label>
         {/* link to download app */}
-        <p className="text-sm py-2">
+        <p className="text-sm py-4">
           Don't have the Desktop app?{" "}
           <a href="#" className="text-[#0053D4]">
             Download the app now

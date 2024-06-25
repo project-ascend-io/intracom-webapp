@@ -1,4 +1,7 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/router";
+
 const InviteTeamMembers = ({
   nextStep,
   prevStep,
@@ -6,6 +9,12 @@ const InviteTeamMembers = ({
   nextStep: () => void;
   prevStep: () => void;
 }) => {
+  // const router = useRouter(); // Initialize useRouter
+
+  const finishSetup = () => {
+    // more logic here (if any) before redirecting
+    // router.push("/dashboard"); // Use router.push to navigate
+  };
   return (
     <div className="bg-white rounded-lg shadow-lg  p-8 ">
       <button onClick={prevStep} className="text-blue-600 text-sm mb-4 block">
@@ -36,7 +45,7 @@ const InviteTeamMembers = ({
       </div>
       <button
         className="bg-blue-600 text-white w-full py-2 rounded-lg"
-        onClick={nextStep}
+        onClick={finishSetup} // Use the finishSetup function here
       >
         Finish setup
       </button>
