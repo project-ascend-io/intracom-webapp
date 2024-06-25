@@ -1,4 +1,5 @@
 "use client";
+const api_url = process.env.NEXT_PUBLIC_API_URL;
 import React, { useState } from "react";
 import Image from "next/image";
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -31,6 +32,11 @@ const SignupUserComplete = () => {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  // const router = useRouter();
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -46,9 +52,64 @@ const SignupUserComplete = () => {
     setShowPassword(!showPassword);
   };
   // const router = useRouter();
+  // Custom validation functions
+  const validateEmail = (email: string) => {
+    // More comprehensive regex for email validation
+    const regex =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email);
+  };
+
+  const validateUsername = (username: string) => {
+    const minLength = 3;
+    const maxLength = 30;
+    const regex = /^[a-zA-Z0-9_]+$/; // Adjust regex as needed
+    return (
+      regex.test(username) &&
+      username.length >= minLength &&
+      username.length <= maxLength
+    );
+  };
+
+  // Enhanced password validation function
+  const validatePassword = (password: string) => {
+    const minLength = 8;
+    const maxLength = 64;
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Example regex
+    return (
+      regex.test(password) &&
+      password.length >= minLength &&
+      password.length <= maxLength
+    );
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Reset error messages
+    setError("");
+    setEmailError("");
+    setUsernameError("");
+    setPasswordError("");
+
+    // Validate inputs
+    let isValid = true;
+    if (!validateEmail(email)) {
+      setEmailError("Invalid email format.");
+      isValid = false;
+    }
+    if (!validateUsername(userName)) {
+      setUsernameError("Username must be 3-15 characters long.");
+      isValid = false;
+    }
+    if (!validatePassword(password)) {
+      setPasswordError("Password must be 8-64 characters long.");
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return; // Stop form submission if validation fails
+    }
 
     // const response: IUser = {
     //   email: "test@gmail.com",
@@ -56,35 +117,40 @@ const SignupUserComplete = () => {
     //   organization: "testing"
     // }
 
-    const response = await fetch(
-      "http://localhost:8080/user-registration",
-      {
+    // const response = await fetch("http://localhost:8080/user-registration",
+    try {
+      const response = await fetch(`${api_url}/user-registration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      }
-    );
+        body: JSON.stringify({ email, userName, password }),
+      });
 
-    if (!response.ok) {
-      // Handle error
-      console.error("Error:", response.statusText);
-    } else {
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.indexOf("application/json") !== -1) {
-        // Handle JSON
-        console.log("Success:", await response.json());
-        // router.push("/Preparing-workspace");
+      if (!response.ok) {
+        // Handle error
+        console.error("Error:", response.statusText);
+        throw new Error("Failed to create account");
       } else {
-        // Handle non-JSON (e.g. HTML)
-        console.log("Received non-JSON response");
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+          // Handle JSON
+          console.log("Success:", await response.json());
+          // router.push("/Preparing-workspace"); // Redirect after successful account creation
+        } else {
+          // Handle non-JSON (e.g. HTML)
+          console.log("Received non-JSON response");
+          const textResponse = await response.text(); // Get the response as text
+          console.log("Response body:", textResponse); // Log the entire response body
+        }
       }
+    } catch (error) {
+      console.error("Error:", error.message);
+      setError(error.message);
+      // Here, you can update the component state to show the error message to the user
     }
   };
+
   return (
     <div className="flex flex-row items-center justify-center min-h-screen bg-gray-50">
       <div className="absolute top-4 left-4 text-blue-600">
@@ -131,6 +197,9 @@ const SignupUserComplete = () => {
                   value={email}
                   onChange={handleEmailChange}
                 />
+                {emailError && (
+                  <p className="text-red-500 text-xs italic">{emailError}</p>
+                )}
               </div>
               <div className="mb-4">
                 <input
@@ -147,6 +216,9 @@ const SignupUserComplete = () => {
                     You can use lowercase numbers, letters, periods, dashes, and
                     underscores.
                   </label>
+                )}
+                {usernameError && (
+                  <p className="text-red-500 text-xs italic">{usernameError}</p>
                 )}
               </div>
               <div className="mb-4 relative">
@@ -170,6 +242,9 @@ const SignupUserComplete = () => {
                   <label className="text-xs text-gray-400 mb-4">
                     Must be 8-64 characters long.
                   </label>
+                )}
+                {passwordError && (
+                  <p className="text-red-500 text-xs italic">{passwordError}</p>
                 )}
               </div>
 
