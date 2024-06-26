@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import Link from "next/link";
 
-// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 // interface Organization {
 //   name: string,
@@ -33,11 +33,12 @@ const SignupUserComplete = () => {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
   const [emailError, setEmailError] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  // const router = useRouter();
+  const [organization, setInputValue] = useState("");
+  const router = useRouter();
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -119,12 +120,12 @@ const SignupUserComplete = () => {
     // }
 
     try {
-      const response = await fetch(`${api_url}/user-registration`, {
+      const response = await fetch(`${api_url}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, userName, password }),
+        body: JSON.stringify({ email, userName, password, organization: "" }),
       });
 
       if (!response.ok) {
@@ -136,7 +137,7 @@ const SignupUserComplete = () => {
         if (contentType && contentType.indexOf("application/json") !== -1) {
           // Handle JSON
           console.log("Success:", await response.json());
-          // router.push("/Preparing-workspace"); // Redirect after successful account creation
+          router.push("/Successful"); // Redirect after successful account creation
         } else {
           // Handle non-JSON (e.g. HTML)
           console.log("Received non-JSON response");
@@ -147,7 +148,10 @@ const SignupUserComplete = () => {
     } catch (error) {
       console.error("Error:", error.message);
       setError(error.message);
+
       // Here, you can update the component state to show the error message to the user
+
+      // setError("Failed to create account. Please try again.");
     }
   };
 
@@ -162,8 +166,7 @@ const SignupUserComplete = () => {
         <div className="mr-8">
           <h1 className="text-4xl font-bold mb-2">Let’s get started</h1>
           <p className="text-gray-600 mb-8">
-            Create your Mattermost account to start collaborating with your
-            team.
+            Create your Intracom account to start collaborating with your team.
           </p>
           <div>
             <Image
@@ -247,18 +250,28 @@ const SignupUserComplete = () => {
                   <p className="text-red-500 text-xs italic">{passwordError}</p>
                 )}
               </div>
+              <label className="block text-sm font-medium text-gray-700">
+                What’s the name of your organization?
+              </label>
+              <input
+                type="text"
+                placeholder="Research Corp"
+                className="border border-gray-300 rounded-md p-2 w-full mb-4"
+                value={organization}
+                onChange={(e) => setInputValue(e.target.value)}
+              />
 
-              <Link href="/Preparing-workspace">
-                <button
-                  type="submit"
-                  className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                >
-                  Create Account
-                </button>
-              </Link>
+              {/* <Link href="/Preparing-workspace"> */}
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              >
+                Create Account
+              </button>
+              {/* </Link> */}
             </form>
             <p className="mt-4 text-sm text-center text-gray-600">
-              Interested in receiving Mattermost security, product, promotions,
+              Interested in receiving Intracom security, product, promotions,
               and company updates via newsletter? Sign up at{" "}
               <a
                 href="https://mattermost.com/security-updates/"
@@ -269,7 +282,7 @@ const SignupUserComplete = () => {
               .
             </p>
             <p className="mt-4 text-sm text-center text-gray-600">
-              By proceeding to create your account and use Mattermost, you agree
+              By proceeding to create your account and use Intracom, you agree
               to our{" "}
               <a
                 href="https://mattermost.com/terms-of-use/"
