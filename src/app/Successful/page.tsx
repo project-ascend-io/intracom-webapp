@@ -29,9 +29,15 @@ const SignUpSuccess = () => {
 
         <button
           onClick={handleDashboardClick}
-          className="w-1/2 bg-blue-600 text-white py-2 px-4  ms-24 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          className="w-1/3 bg-blue-600 text-white py-2 px-4  mx-1  rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         >
           Proceed to Dashboard
+        </button>
+        <button
+          // onClick='window.location.href = "https://play.google.com/store/apps/details?id=com.intracom.io";'
+          className="w-1/2 bg-blue-400 text-white py-2 px-4 mx-1  rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          Click here to download the app
         </button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const InviteTeamMembers = ({
   nextStep,
@@ -9,11 +9,11 @@ const InviteTeamMembers = ({
   nextStep: () => void;
   prevStep: () => void;
 }) => {
-  // const router = useRouter(); // Initialize useRouter
+  const router = useRouter(); // Initialize useRouter
 
   const finishSetup = () => {
     // more logic here (if any) before redirecting
-    // router.push("/dashboard"); // Use router.push to navigate
+    router.push("/dashboard"); // Use router.push to navigate
   };
   return (
     <div className="bg-white rounded-lg shadow-lg  p-8 ">
