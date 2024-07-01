@@ -37,7 +37,7 @@ const SignupUserComplete = () => {
   const [emailError, setEmailError] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [organization, setInputValue] = useState("");
+  const [organization, setOrganization] = useState("");
   const router = useRouter();
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,7 +125,7 @@ const SignupUserComplete = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, userName, password, organization: "" }),
+        body: JSON.stringify({ email, username: userName, password, organization }),
       });
 
       if (!response.ok) {
@@ -258,7 +258,7 @@ const SignupUserComplete = () => {
                 placeholder="Research Corp"
                 className="border border-gray-300 rounded-md p-2 w-full mb-4"
                 value={organization}
-                onChange={(e) => setInputValue(e.target.value)}
+                onChange={(e) => setOrganization(e.target.value)}
               />
 
               {/* <Link href="/Preparing-workspace"> */}
