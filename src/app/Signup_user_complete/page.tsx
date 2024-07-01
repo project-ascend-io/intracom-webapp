@@ -3,30 +3,9 @@ const api_url = process.env.NEXT_PUBLIC_API_URL;
 import React, { useState } from "react";
 import Image from "next/image";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import Link from "next/link";
+// import Link from "next/link";
 
 import { useRouter } from "next/navigation";
-
-// interface Organization {
-//   name: string,
-//   avatar: string,
-// }
-
-// // Admin User
-// // Will have an org during the first step
-// interface IUser {
-//   email: string,
-//   username: string,
-//   organization?: string,
-// }
-
-// // Regular User
-// // Will always have org because they will be invited into the org
-// interface IUser {
-//   email: string,
-//   username: string,
-//   organization?: string,
-// }
 
 const SignupUserComplete = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -113,11 +92,7 @@ const SignupUserComplete = () => {
       return; // Stop form submission if validation fails
     }
 
-    // const response: IUser = {
-    //   email: "test@gmail.com",
-    //   username: "test",
-    //   organization: "testing"
-    // }
+    // Call the API to create the user account
 
     try {
       const response = await fetch(`${api_url}/users`, {
@@ -125,31 +100,35 @@ const SignupUserComplete = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, username: userName, password, organization }),
+        body: JSON.stringify({
+          email,
+          username: userName,
+          password,
+          organization,
+        }),
       });
 
       if (!response.ok) {
-        // Handle error
-        console.error("Error:", response.statusText);
-        throw new Error("Failed to create account");
+        console.error("Error:", response.status, response.statusText);
+        throw new Error(
+          `Failed to create account: ${response.status} ${response.statusText}`
+        );
       } else {
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.indexOf("application/json") !== -1) {
-          // Handle JSON
           console.log("Success:", await response.json());
-          router.push("/Successful"); // Redirect after successful account creation
+          router.push("/Successful");
         } else {
-          // Handle non-JSON (e.g. HTML)
           console.log("Received non-JSON response");
-          const textResponse = await response.text(); // Get the response as text
-          console.log("Response body:", textResponse); // Log the entire response body
+          const textResponse = await response.text();
+          console.log("Response body:", textResponse);
         }
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      console.error("Error:", error);
       setError(error.message);
 
-      // Here, you can update the component state to show the error message to the user
+      // To update the component state to show the error message to the user
 
       // setError("Failed to create account. Please try again.");
     }
