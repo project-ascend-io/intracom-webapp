@@ -15,7 +15,7 @@ const Navbar = () => {
           </button>
 
           <Image
-            src="/profile2.jpg"
+            src="/newchat.png"
             width={30}
             height={20}
             alt="Profile"
