@@ -1,41 +1,37 @@
 "use client";
-const api_url = process.env.NEXT_PUBLIC_API_URL;
-import React, { useState } from "react";
+const api_url = process.env.NEXT_PUBLIC_API_URL as string;
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-// import Link from "next/link";
-
 import { useRouter } from "next/navigation";
 
-const SignupUserComplete = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState<string>("");
-  const [emailError, setEmailError] = useState("");
-  const [usernameError, setUsernameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [organization, setOrganization] = useState("");
+const SignupUserComplete: React.FC = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [error, setError] = useState<string>(""); // Explicitly type 'error' as a string
+  const [emailError, setEmailError] = useState<string>("");
+  const [usernameError, setUsernameError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
+  const [organization, setOrganization] = useState<string>("");
   const router = useRouter();
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
-  const handleUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUserNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
   };
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  // const router = useRouter();
-  // Custom validation functions
+
   const validateEmail = (email: string) => {
-    // More comprehensive regex for email validation
     const regex =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(email);
@@ -44,7 +40,7 @@ const SignupUserComplete = () => {
   const validateUsername = (username: string) => {
     const minLength = 3;
     const maxLength = 30;
-    const regex = /^[a-zA-Z0-9_]+$/; // Adjust regex as needed
+    const regex = /^[a-zA-Z0-9_]+$/;
     return (
       regex.test(username) &&
       username.length >= minLength &&
@@ -52,12 +48,11 @@ const SignupUserComplete = () => {
     );
   };
 
-  // Enhanced password validation function
   const validatePassword = (password: string) => {
     const minLength = 8;
     const maxLength = 64;
     const regex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Example regex
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return (
       regex.test(password) &&
       password.length >= minLength &&
@@ -65,15 +60,13 @@ const SignupUserComplete = () => {
     );
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Reset error messages
     setError("");
     setEmailError("");
     setUsernameError("");
     setPasswordError("");
 
-    // Validate inputs
     let isValid = true;
     if (!validateEmail(email)) {
       setEmailError("Invalid email format.");
@@ -89,10 +82,8 @@ const SignupUserComplete = () => {
     }
 
     if (!isValid) {
-      return; // Stop form submission if validation fails
+      return;
     }
-
-    // Call the API to create the user account
 
     try {
       const response = await fetch(`${api_url}/users`, {
@@ -126,11 +117,7 @@ const SignupUserComplete = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setError(error.message);
-
-      // To update the component state to show the error message to the user
-
-      // setError("Failed to create account. Please try again.");
+      // setError(error.message);
     }
   };
 
@@ -237,17 +224,16 @@ const SignupUserComplete = () => {
                 placeholder="Research Corp"
                 className="border border-gray-300 rounded-md p-2 w-full mb-4"
                 value={organization}
-                onChange={(e) => setOrganization(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setOrganization(e.target.value)
+                }
               />
-
-              {/* <Link href="/Preparing-workspace"> */}
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               >
                 Create Account
               </button>
-              {/* </Link> */}
             </form>
             <p className="mt-4 text-sm text-center text-gray-600">
               Interested in receiving Intracom security, product, promotions,

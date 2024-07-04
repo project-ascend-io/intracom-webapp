@@ -1,11 +1,22 @@
 "use client";
+const api_url = process.env.NEXT_PUBLIC_API_URL as string;
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, FC, ChangeEvent, FormEvent } from "react";
+
+interface OrganizationPageProps {
+  nextStep: () => void;
+}
+
+// Interface for organization data
+interface OrganizationData {
+  name: string;
+}
 
 // Function to register an organization
-async function registerOrganization(organizationData) {
-  const response = await fetch("http://localhost:8080/organizations", {
-    // Adjusted to target a backend API endpoint
+async function registerOrganization(
+  organizationData: OrganizationData
+): Promise<any> {
+  const response = await fetch(`${api_url}/users`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,11 +31,11 @@ async function registerOrganization(organizationData) {
   return response.json();
 }
 
-const OrganizationPage = ({ nextStep }: { nextStep: () => void }) => {
-  const [organizationName, setOrganizationName] = useState("");
+const OrganizationPage: FC<OrganizationPageProps> = ({ nextStep }) => {
+  const [organizationName, setOrganizationName] = useState<string>("");
 
   // Handles the form submission and calls the registerOrganization function
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
       const data = await registerOrganization({ name: organizationName });
@@ -66,10 +77,18 @@ const OrganizationPage = ({ nextStep }: { nextStep: () => void }) => {
           >
             Continue
           </button>
+          <button
+            onClick={() => {
+              // To handle the no-selected tools as needed
+              nextStep();
+            }}
+            className="bg-gray-400 text-white px-4 py-2 mt-1 rounded-md w-full"
+          >
+            Go to Next
+          </button>
         </form>
       </div>
     </div>
   );
 };
-
 export default OrganizationPage;

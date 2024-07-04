@@ -2,21 +2,24 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-const InviteTeamMembers = ({
-  nextStep,
-  prevStep,
-}: {
+interface InviteTeamMembersProps {
   nextStep: () => void;
   prevStep: () => void;
+}
+
+const InviteTeamMembers: React.FC<InviteTeamMembersProps> = ({
+  nextStep,
+  prevStep,
 }) => {
   const router = useRouter(); // Initialize useRouter
 
   const finishSetup = () => {
-    // more logic here (if any) before redirecting
+    // More logic here (if any) before redirecting
     router.push("/dashboard"); // Use router.push to navigate
   };
+
   return (
-    <div className="bg-white rounded-lg shadow-lg  p-8 ">
+    <div className="bg-white rounded-lg shadow-lg p-8">
       <button onClick={prevStep} className="text-blue-600 text-sm mb-4 block">
         &lt; Previous
       </button>
