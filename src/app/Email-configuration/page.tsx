@@ -1,6 +1,7 @@
 "use client";
 
 import LeftsideBar from "@/Components/Leftside-bar/page";
+import SettingsDropdown from "@/Components/SettingsDropdown/page";
 import { useState } from "react";
 
 const EmailSettings = () => {
@@ -23,9 +24,10 @@ const EmailSettings = () => {
   };
 
   return (
-    <main className="flex flex-row mx-10">
+    <main className="flex flex-row mx-10 mt-10">
       <LeftsideBar />
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      {/* <SettingsDropdown /> */}
+      <div className="min-h-screen  flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-semibold mb-6">Email Settings</h2>
           <div className="space-y-4">
