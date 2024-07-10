@@ -108,7 +108,7 @@ const SignupUserComplete: React.FC = () => {
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.indexOf("application/json") !== -1) {
           console.log("Success:", await response.json());
-          router.push("/Successful");
+          router.push("successful");
         } else {
           console.log("Received non-JSON response");
           const textResponse = await response.text();
@@ -228,36 +228,37 @@ const SignupUserComplete: React.FC = () => {
                   setOrganization(e.target.value)
                 }
               />
+
+              <p className="mt-4 text-sm  text-gray-600">
+                Interested in receiving Intracom security, product, promotions,
+                and company updates via newsletter? Sign up at{" "}
+                <a
+                  href="https://intracom.com/security-updates/"
+                  className="text-blue-600 underline"
+                >
+                  https://intracom.com/security-updates/
+                </a>
+                .
+              </p>
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                className="w-full bg-blue-600 text-white my-4 py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               >
                 Create Account
               </button>
             </form>
             <p className="mt-4 text-sm text-center text-gray-600">
-              Interested in receiving Intracom security, product, promotions,
-              and company updates via newsletter? Sign up at{" "}
-              <a
-                href="https://mattermost.com/security-updates/"
-                className="text-blue-600 underline"
-              >
-                https://mattermost.com/security-updates/
-              </a>
-              .
-            </p>
-            <p className="mt-4 text-sm text-center text-gray-600">
               By proceeding to create your account and use Intracom, you agree
               to our{" "}
               <a
-                href="https://mattermost.com/terms-of-use/"
+                href="https://intracom.com/terms-of-use/"
                 className="text-blue-600 underline"
               >
                 Terms of Use
               </a>{" "}
               and{" "}
               <a
-                href="https://mattermost.com/privacy-policy/"
+                href="https://intracom.com/privacy-policy/"
                 className="text-blue-600 underline"
               >
                 Privacy Policy

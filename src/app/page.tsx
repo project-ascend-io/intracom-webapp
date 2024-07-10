@@ -4,17 +4,15 @@ import Link from "next/link";
 export default function Home() {
   return (
     <section className="flex items-center justify-center mt-20">
-      <div className="w-full  ">
-        {/* className="lg:ml-40 md:ml-30 */}
-        <Image
-          className="w-full lg:ml-44 lg:w-1/2 md:ml-30"
-          src="/landingpage.png"
-          alt="landing page"
-          width={37}
-          height={37}
-        />
-      </div>
-      <div className="w-full pr-[40px] lg:mr-40">
+      <Image
+        className="w-full lg:ml-44 lg:w-1/2 md:ml-30 "
+        src="/landingpage.png"
+        alt="landing page"
+        width={400}
+        height={300}
+      />
+
+      <div className="w-full pr-[40px] lg:mx-40">
         <h1 className="text-xl font-bold py-2">
           Where would you like to view this?
         </h1>
@@ -29,7 +27,7 @@ export default function Home() {
             </button>
           </Link>
           {/* redirect to User sign-up page */}
-          <Link href="/Signup_user_complete">
+          <Link href="/signup_user_complete">
             <button className="bg-[#EAF0FB] text-[#0053D4] text-center text-sm p-2 rounded-md">
               View in Web Browser
             </button>
