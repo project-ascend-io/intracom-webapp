@@ -1,5 +1,6 @@
 'use client'
 import {useState} from "react";
+import {useRouter} from "next/navigation";
 
 type UserInviteForm = {
     email: string;
@@ -7,6 +8,7 @@ type UserInviteForm = {
     password: string;
 }
 export default function UserInvitePage() {
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState<boolean>(false);
    const signup = (formData: FormData) => {
        setIsLoading(true);
@@ -20,11 +22,15 @@ export default function UserInvitePage() {
            return;
        }
        const body: UserInviteForm = {
+           // @todo Use ZOD Validation HERE
+           // @ts-ignore
            email, username, password
        };
 
+       // @todo Replace timeout with service call.
        setTimeout(() => {
           console.log("200 - " + JSON.stringify(body));
+          router.push("/auth/download");
           setIsLoading(false);
        }, 3000);
    }
