@@ -1,5 +1,33 @@
+'use client'
+import {useState} from "react";
+
+type UserInviteForm = {
+    email: string;
+    username: string;
+    password: string;
+}
 export default function UserInvitePage() {
-    // Validate hash here
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+   const signup = (formData: FormData) => {
+       setIsLoading(true);
+
+       const username = formData.get("username");
+       const email = formData.get("email");
+       const password = formData.get("password");
+       const terms = formData.get("terms");
+
+       if (!email || !username || !password || !terms) {
+           return;
+       }
+       const body: UserInviteForm = {
+           email, username, password
+       };
+
+       setTimeout(() => {
+          console.log("200 - " + JSON.stringify(body));
+          setIsLoading(false);
+       }, 3000);
+   }
 
   return (
    <>
@@ -9,29 +37,35 @@ export default function UserInvitePage() {
                <p>We&apos;re excited to have you join us. Let&apos;s get to know each other a little better.</p>
            </div>
            <div className="my-3 md:max-w-lg md:mx-auto">
-               <div className="my-3">
-                   <input type="text" placeholder="Your username"
-                          className="input input-bordered w-full max-w-lg rounded-lg"/>
-               </div>
-               <div className="my-3">
-                   <input type="email" placeholder="Your email"
-                          className="input input-bordered w-full max-w-lg rounded-lg"/>
-               </div>
-               <div className="my-3">
-                   <input type="password" placeholder="Your password"
-                          className="input input-bordered w-full max-w-lg rounded-lg"/>
-               </div>
-               <div className="my-3">
-                   <div className="form-control">
-                       <label className="label justify-normal">
-                           <input type="checkbox" className="checkbox checkbox-primary mr-3"/>
-                           <span className="label-text">I agree to the Terms of Service and Privacy Policy</span>
-                       </label>
+               <form action={signup}>
+                   <div className="my-3">
+                       <input type="text" name="username" placeholder="Your username"
+                              className="input input-bordered w-full max-w-lg rounded-lg"/>
                    </div>
-               </div>
-               <div className="my-3">
-                   <button className="btn btn-primary rounded-lg text-white w-full">Sign up</button>
-               </div>
+                   <div className="my-3">
+                       <input type="email" name="email" placeholder="Your email"
+                              className="input input-bordered w-full max-w-lg rounded-lg"/>
+                   </div>
+                   <div className="my-3">
+                       <input type="password" name="password" placeholder="Your password"
+                              className="input input-bordered w-full max-w-lg rounded-lg"/>
+                   </div>
+                   <div className="my-3">
+                       <div className="form-control">
+                           <label className="label justify-normal">
+                               <input type="checkbox" name="terms" className="checkbox checkbox-primary mr-3"/>
+                               <span className="label-text">I agree to the Terms of Service and Privacy Policy</span>
+                           </label>
+                       </div>
+                   </div>
+                   <div className="my-3">
+                       <button type="submit" disabled={isLoading}
+                               className="btn btn-primary rounded-lg text-white w-full">
+                           <span hidden={isLoading}>Sign up</span>
+                           <span hidden={!isLoading}>Signing up...</span>
+                       </button>
+                   </div>
+               </form>
            </div>
        </div>
    </>
