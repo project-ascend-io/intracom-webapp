@@ -1,7 +1,9 @@
 'use client'
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useRouter} from "next/navigation";
 import { Invitation, UserInviteForm } from "./types";
+import FeedbackForm from "@/components/feedback-form";
+import InviteResponse from "@/components/invite-response";
 
 export default function ViewUserInvitePage() {
     const router = useRouter();
@@ -67,75 +69,30 @@ export default function ViewUserInvitePage() {
     }
 
     if (invite?.state == "denied") {
+        const handleFeedbackSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            // @todo submit patch request here.
+        };
+
         return (
           <>
               <div className="container mx-auto md:w-9/12">
                   <div className="text-center mb-12 md:mb-6">
-                      <h1 className="mt-6 mb-2 text-xl font-bold">Thank you updating the invitation.</h1>
-                      <p>Before completing your request, can you provide feedback on why you&apos;ve denied the invitation?</p>
+                      <h1 className="mt-6 mb-2 text-xl font-bold">Thank you for updating the invitation.</h1>
+                      <p>Before completing your request, can you provide feedback on why you&apos;ve denied the
+                          invitation?</p>
                   </div>
-                  <form action={feedback}>
-                      <div className="my-2">
-                          <label className="flex items-center">
-                              <input type="radio" name="reason" value="organization" className="radio mx-3" />
-                              <span>I don&apos;t know the organization.</span>
-                          </label>
-                      </div>
-                      <div className="my-2">
-                          <label className="flex items-center">
-                              <input type="radio" name="reason" value="interest" className="radio mx-3" />
-                              <span>I&apos;m not interested joining Intacom.</span>
-                          </label>
-                      </div>
-                      <div className="my-2">
-                          <label className="flex items-center">
-                              <input type="radio" name="reason" value="other" className="radio mx-3" />
-                              <span>Other</span>
-                          </label>
-                      </div>
-                      <div className="my-4">
-                          <button type="submit"
-                                  className="btn btn-error rounded-lg text-white"
-                                  disabled={isLoading}>
-                              Deny Invitation
-                          </button>
-                      </div>
-                  </form>
+                  <div className="mx-auto w-80">
+                      <FeedbackForm onSubmit={handleFeedbackSubmit} isLoading={isLoading} />
+                  </div>
               </div>
           </>
         );
     }
 
+
     if (invite?.state == "pending") {
-        return (
-          <>
-              <div className="container mx-auto md:w-9/12">
-                  <div className="text-center mb-12 md:mb-6">
-                      <h1 className="mt-6 mb-2 text-xl font-bold">You&apos;ve been invited to
-                          join {invite?.organization.name} on Intracom</h1>
-                  </div>
-                  <div className="my-3 w-full md:w-96 mx-auto">
-                      <button type="submit"
-                              onClick={() => submitInviteResponse(true)}
-                              className="btn btn-primary rounded-lg text-white w-full"
-                              disabled={isLoading}>
-                          Accept
-                      </button>
-                  </div>
-                  <div className="text-center">
-                      <p>Or</p>
-                  </div>
-                  <div className="my-3 w-full md:w-96 mx-auto">
-                      <button type="submit"
-                              onClick={() => submitInviteResponse(false)}
-                              className="btn btn-secondary rounded-lg text-white w-full"
-                              disabled={isLoading}>
-                          No, thanks.
-                      </button>
-                  </div>
-              </div>
-          </>
-        );
+        return <InviteResponse invite={invite} submitInviteResponse={submitInviteResponse} isLoading={isLoading} />;
     }
 
     /*
