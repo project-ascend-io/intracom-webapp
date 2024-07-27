@@ -1,40 +1,42 @@
 'use client'
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import {useRouter} from "next/navigation";
-
-type UserInviteForm = {
-    email: string;
-    username: string;
-    password: string;
-}
-
-type Invitation = {
-    _id: string;
-    email: string;
-    organization: {
-        _id: string;
-        name: string;
-    };
-    state: string;
-    hash: string;
-}
+import { Invitation, UserInviteForm } from "./types";
 
 export default function ViewUserInvitePage() {
-    const dummyInvite: Invitation = {
-        _id: "random-hash",
-        email: "foo@bar.com",
-        organization: {
-            _id: "random-org-id",
-            name: "Letstat's Coffee Shop"
-        },
-        state: "pending",
-        hash: "random-invite-hash"
-    }
-
     const router = useRouter();
-    const [invite, setInvite] = useState<Invitation>(dummyInvite);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [invite, setInvite] = useState<Invitation>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
+    useEffect(() => {
+        // fetch('/api/profile-data')
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //       setInvite(data);
+        //       setIsLoading(false);
+        //   });
+        setTimeout(() => {
+            setInvite({
+                _id: "random-hash",
+                email: "foo@bar.com",
+                organization: {
+                    _id: "random-org-id",
+                    name: "Letstat's Coffee Shop"
+                },
+                state: "pending",
+                hash: "random-invite-hash"
+            });
+            setIsLoading(false)
+        }, 1500);
+    }, []);
+
+    if (isLoading) {
+        return (
+          <>
+              <div>Is Loading</div>
+          </>
+        );
+    }
     const submitInviteResponse = (hasAccepted: boolean) => {
         console.log("Responding to invite...");
         setIsLoading(true);
@@ -138,7 +140,7 @@ export default function ViewUserInvitePage() {
 
     /*
     1. Get hash from URL
-    2. GET request to back to verify invitation is valid (not expired or deleted)  -> return inviation
+    2. GET request to back to verify invitation is valid (not expired or deleted)  -> return invitation
     3.
      */
 
@@ -156,7 +158,7 @@ export default function ViewUserInvitePage() {
         const body: UserInviteForm = {
             // @todo Use ZOD Validation HERE
             // @ts-ignore
-            email, username, password
+            hash, username, password
         };
 
         // @todo Replace timeout with service call.
