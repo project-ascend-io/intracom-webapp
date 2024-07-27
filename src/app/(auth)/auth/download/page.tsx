@@ -3,8 +3,8 @@ export default function DownloadPage() {
     return (
         <>
             <div className="container mx-auto md:w-9/12">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 py-6">
-                    <div className="lg:col-span-2">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 py-6">
+                    <div className="lg:col-span-4">
                         <h1 className="text-xl font-bold">Congratulation, you&apos;re account is all setup!</h1>
                         <p>To get started, download the desktop app.</p>
 
