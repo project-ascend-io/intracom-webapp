@@ -6,17 +6,14 @@ import FeedbackForm from "@/components/feedback-form";
 import InviteResponse from "@/components/invite-response";
 import { useInvite } from "@/hooks/use-invites";
 import SignupForm from "@/components/signup-form";
+import LoadingIndicator from "@/components/loading-indicator";
 
 export default function ViewUserInvitePage() {
     const router = useRouter();
     const { invite, isLoading, error, setInvite, setIsLoading } = useInvite();
 
     if (isLoading) {
-        return (
-          <>
-              <div>Is Loading</div>
-          </>
-        );
+        return <LoadingIndicator />;
     }
 
     if (error) {
