@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import {useRouter} from "next/navigation";
-import { Invitation, UserInviteForm } from "./types";
+import {useParams, useRouter} from "next/navigation";
+import { InviteState, UserInviteForm, UserInviteParams } from "./types";
 import FeedbackForm from "@/components/feedback-form";
 import InviteResponse from "@/components/invite-response";
 import { useInvite } from "@/hooks/use-invites";
@@ -10,17 +10,19 @@ import LoadingIndicator from "@/components/loading-indicator";
 
 export default function ViewUserInvitePage() {
     const router = useRouter();
-    const { invite, isLoading, error, setInvite, setIsLoading } = useInvite();
+    const params = useParams<UserInviteParams>();
+    const { invite, isLoading, error, setInvite, setIsLoading } = useInvite(params);
 
     if (isLoading) {
         return <LoadingIndicator />;
     }
 
     if (error) {
+        // @todo - improve error state.
         return <div>{error}</div>;
     }
 
-    if (invite?.state == "denied") {
+    if (invite?.state == InviteState.Denied) {
         const handleFeedbackSubmit = (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             // @todo submit patch request here.
@@ -43,7 +45,7 @@ export default function ViewUserInvitePage() {
     }
 
 
-    if (invite?.state == "pending") {
+    if (invite?.state == InviteState.Pending) {
         const submitInviteResponse = (hasAccepted: boolean) => {
             console.log("Responding to invite...");
             setIsLoading(true);
@@ -57,7 +59,7 @@ export default function ViewUserInvitePage() {
         return <InviteResponse invite={invite} submitInviteResponse={submitInviteResponse} isLoading={isLoading} />;
     }
 
-    if (invite?.state === "accepted") {
+    if (invite?.state === InviteState.Accepted) {
         const handleSignupSubmit = (formData: UserInviteForm) => {
             setIsLoading(true);
 

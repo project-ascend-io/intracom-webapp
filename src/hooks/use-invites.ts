@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Invitation } from "@/app/(public)/user-invites/[hash]/types";
+import { UserInviteParams } from "@/app/(public)/user-invites/[hash]/page";
 
-export const useInvite = () => {
+export const useInvite = ({ hash }: UserInviteParams) => {
   const [invite, setInvite] = useState<Invitation | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -9,25 +10,18 @@ export const useInvite = () => {
   useEffect(() => {
     const fetchInvite = async () => {
       try {
-        // fetch('/api/profile-data')
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //       setInvite(data);
-        //       setIsLoading(false);
-        //   });
-        setTimeout(() => {
-          setInvite({
-            _id: "random-hash",
-            email: "foo@bar.com",
-            organization: {
-              _id: "random-org-id",
-              name: "Letstat's Coffee Shop"
-            },
-            state: "pending",
-            hash: "random-invite-hash"
-          });
-          setIsLoading(false);
-        }, 1500);
+        const response = await fetch('http://localhost:8080/user-invites/' + hash, {
+            cache: 'no-store'
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const userInvitation = data.responseObject;
+        setInvite(userInvitation);
+        setIsLoading(false);
       } catch (err) {
         setError("Failed to load invite");
         setIsLoading(false);
