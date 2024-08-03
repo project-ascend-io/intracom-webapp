@@ -23,9 +23,18 @@ export default function ViewUserInvitePage() {
     }
 
     if (invite?.state == InviteState.Denied) {
-        const handleFeedbackSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        const handleFeedbackSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
-            // @todo submit patch request here.
+            const updateInvite = await fetch('http://localhost:8080/user-invites/' + invite.hash, {
+                headers: { 'Content-Type': 'application/json' },
+                method: 'PATCH',
+                body: JSON.stringify({ state: InviteState.Denied })
+            });
+            
+            if (!updateInvite.ok) {
+                throw new Error(`HTTP error! Status: ${updateInvite.status}`);
+            }
+            router.push("/");
         };
 
         return (
