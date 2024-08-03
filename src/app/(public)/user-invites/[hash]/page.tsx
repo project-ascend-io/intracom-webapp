@@ -49,26 +49,47 @@ export default function ViewUserInvitePage() {
         const submitInviteResponse = (hasAccepted: boolean) => {
             console.log("Responding to invite...");
             setIsLoading(true);
-
-            // @todo - submit patch request here
+            
             setTimeout(() => {
-                setInvite(prevInvite => prevInvite ? { ...prevInvite, state: hasAccepted ? "accepted" : "denied" } : null);
+                setInvite(prevInvite => prevInvite ? { ...prevInvite, state: hasAccepted ? InviteState.Accepted : InviteState.Denied } : null);
                 setIsLoading(false);
-            }, 3000);
+            }, 750);
         }
         return <InviteResponse invite={invite} submitInviteResponse={submitInviteResponse} isLoading={isLoading} />;
     }
 
     if (invite?.state === InviteState.Accepted) {
-        const handleSignupSubmit = (formData: UserInviteForm) => {
+        const handleSignupSubmit = async (formData: UserInviteForm) => {
             setIsLoading(true);
 
-            // @todo - submit post request here
-            setTimeout(() => {
-                console.log("200 - " + JSON.stringify(formData));
-                router.push("/auth/download");
-                // setIsLoading(false);
-            }, 3000);
+            const updateInvite = await fetch('http://localhost:8080/user-invites/' + invite.hash, {
+                headers: { 'Content-Type': 'application/json' },
+                method: 'PATCH',
+                body: JSON.stringify({ state: InviteState.Accepted })
+            });
+
+            if (!updateInvite.ok) {
+                throw new Error(`HTTP error! Status: ${updateInvite.status}`);
+            }
+            const acceptedInvite = await fetch('http://localhost:8080/users/signup', {
+                headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                body: JSON.stringify({
+                    hash: invite.hash,
+                    username: formData.username,
+                    password: formData.password
+                })
+            });
+
+            if (!acceptedInvite.ok) {
+                throw new Error(`HTTP error! Status: ${acceptedInvite.status}`);
+            }
+
+            const data = await acceptedInvite.json();
+            const userInvitation = data.responseObject;
+            setInvite(userInvitation);
+            console.log("200 - " + JSON.stringify(formData));
+            router.push("/auth/download");
         };
 
         return <SignupForm invite={invite} isLoading={isLoading} onSubmit={handleSignupSubmit} />;
