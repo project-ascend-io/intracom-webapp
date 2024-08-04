@@ -20,6 +20,12 @@ export interface UserInviteForm {
   password: string;
 }
 
+export interface SignupFormProps {
+  invite: Invitation;
+  isLoading: boolean;
+  onSubmit: (formData: UserInviteForm) => void;
+}
+
 export enum InviteState {
   Pending = "Pending",
   Denied = "Denied",
@@ -51,7 +57,6 @@ export const UserSignUpSchema = z.object({
 
     return containsUppercase(password) && containsLowercase(password) && containsSpecialChar(password) && containsNumber(password);
   }, 'Password must contain at least one uppercase character, one lowercase character, and one special character.'),
-  //terms: z.boolean({ message: 'You must agree to the Terms of Service and Privacy Policy.'})
   terms: z.boolean().refine((value: boolean) => value === true, 'You must agree to the Terms of Service and Privacy Policy.')
 });
 

@@ -1,13 +1,7 @@
 import React from "react";
-import { Invitation, UserInviteForm, UserSignUpSchema, UserSignUpSchemaType } from "@/app/(public)/user-invites/[hash]/types";
+import { SignupFormProps, UserInviteForm, UserSignUpSchema, UserSignUpSchemaType } from "@/app/(public)/user-invites/[hash]/types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-interface SignupFormProps {
-  invite: Invitation;
-  isLoading: boolean;
-  onSubmit: (formData: UserInviteForm) => void;
-}
 
 const SignupForm: React.FC<SignupFormProps> = ({ invite, isLoading, onSubmit }) => {
   const {

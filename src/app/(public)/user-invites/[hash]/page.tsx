@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {useParams, useRouter} from "next/navigation";
 import { InviteState, UserInviteForm, UserInviteParams } from "./types";
 import FeedbackForm from "@/components/feedback-form";

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ApiResponseWrapper, Invitation, UserInviteParams } from "@/app/(public)/user-invites/[hash]/types";
+const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 export const useInvite = ({ hash }: UserInviteParams) => {
   const [invite, setInvite] = useState<Invitation | null>(null);
@@ -9,7 +10,7 @@ export const useInvite = ({ hash }: UserInviteParams) => {
   useEffect(() => {
     const fetchInvite = async () => {
       try {
-        const response = await fetch('http://localhost:8080/user-invites/' + hash, {
+        const response = await fetch(API_URL + '/user-invites/' + hash, {
             cache: 'no-store'
         });
 
