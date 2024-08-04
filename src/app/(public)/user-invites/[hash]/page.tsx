@@ -8,7 +8,7 @@ import { useInvite } from "@/hooks/use-invites";
 import SignupForm from "@/components/signup-form";
 import LoadingIndicator from "@/components/loading-indicator";
 
-export default function ViewUserInvitePage() {
+const ViewUserInvitePage = () => {
     const router = useRouter();
     const params = useParams<UserInviteParams>();
     const { invite, isLoading, error, setInvite, setIsLoading } = useInvite(params);
@@ -18,8 +18,23 @@ export default function ViewUserInvitePage() {
     }
 
     if (error) {
-        // @todo - improve error state.
-        return <div>{error}</div>;
+        // @todo - Leverage React ErrorBoundary or NextJS Error pages.
+        return (
+            <>
+            <div className="container mx-auto md:w-9/12">
+                  <div className="text-center mb-12 md:mb-6">
+                      <h1 className="mt-6 mb-2 text-xl font-bold">{error.message}</h1>
+                      {/* <p>Before completing your request, can you provide feedback on why you&apos;ve denied the
+                          invitation?</p> */}
+                  </div>
+                  <div className="mx-auto text-center w-80">
+                    <a href="/">
+                        Click here to go home
+                    </a>
+                  </div>
+              </div>
+            </>
+        );
     }
 
     if (invite?.state == InviteState.Denied) {
@@ -104,3 +119,11 @@ export default function ViewUserInvitePage() {
         return <SignupForm invite={invite} isLoading={isLoading} onSubmit={handleSignupSubmit} />;
     }
 };
+
+const ViewUserInviteErrorBoundary = () => {
+    return (
+        <ViewUserInvitePage />
+    )
+}
+
+export default ViewUserInviteErrorBoundary;

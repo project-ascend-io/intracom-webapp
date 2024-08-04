@@ -29,3 +29,10 @@ export enum InviteState {
 export interface UserInviteParams extends Params {
   hash: string
 }
+
+export interface ApiResponseWrapper {
+  success: boolean;
+  message: string;
+  responseObject: {} | null;
+  statusCode: number;
+}

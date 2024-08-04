@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { Invitation } from "@/app/(public)/user-invites/[hash]/types";
-import { UserInviteParams } from "@/app/(public)/user-invites/[hash]/page";
+import { ApiResponseWrapper, Invitation, UserInviteParams } from "@/app/(public)/user-invites/[hash]/types";
 
 export const useInvite = ({ hash }: UserInviteParams) => {
   const [invite, setInvite] = useState<Invitation | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ApiResponseWrapper | null>(null);
 
   useEffect(() => {
     const fetchInvite = async () => {
@@ -15,7 +14,10 @@ export const useInvite = ({ hash }: UserInviteParams) => {
         });
 
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          const data = await response.json();
+          setError(data);
+          setIsLoading(false);
+          return;
         }
 
         const data = await response.json();
@@ -23,7 +25,7 @@ export const useInvite = ({ hash }: UserInviteParams) => {
         setInvite(userInvitation);
         setIsLoading(false);
       } catch (err) {
-        setError("Failed to load invite");
+        setError(err);
         setIsLoading(false);
       }
     };
