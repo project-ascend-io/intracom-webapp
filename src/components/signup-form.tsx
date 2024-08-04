@@ -1,6 +1,7 @@
 import React from "react";
-import { useRouter } from "next/navigation";
-import { Invitation, UserInviteForm } from "@/app/(public)/user-invites/[hash]/types";
+import { Invitation, UserInviteForm, UserSignUpSchema, UserSignUpSchemaType } from "@/app/(public)/user-invites/[hash]/types";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface SignupFormProps {
   invite: Invitation;
@@ -9,25 +10,18 @@ interface SignupFormProps {
 }
 
 const SignupForm: React.FC<SignupFormProps> = ({ invite, isLoading, onSubmit }) => {
-  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+   } = useForm<UserSignUpSchemaType>({ resolver: zodResolver(UserSignUpSchema)});
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const username = formData.get("username")?.toString() || "";
-    const password = formData.get("password")?.toString() || "";
-    const terms = formData.get("terms") === "on";
-
-    if (!username || !password || !terms) {
-      return;
-    }
-
+  const submitForm: SubmitHandler<UserSignUpSchemaType> = (form: UserSignUpSchemaType) => {
     const body: UserInviteForm = {
       hash: invite.hash,
-      username,
-      password
+      username: form.username,
+      password: form.password
     };
-
     onSubmit(body);
   };
 
@@ -38,25 +32,29 @@ const SignupForm: React.FC<SignupFormProps> = ({ invite, isLoading, onSubmit }) 
         <p>We&apos;re excited to have you join us. Let&apos;s get to know each other a little better.</p>
       </div>
       <div className="my-3 md:max-w-lg md:mx-auto">
-        <form onSubmit={handleSubmit}>
-          <div className="my-3">
-            <input type="text" name="username" placeholder="Your username"
-                   className="input input-bordered w-full max-w-lg rounded-lg"/>
-          </div>
+        <form onSubmit={handleSubmit(submitForm)}>
           <div className="my-3">
             <input type="email" name="email" placeholder="Your email" value={invite.email} disabled={true}
                    className="input input-bordered w-full max-w-lg rounded-lg"/>
           </div>
           <div className="my-3">
-            <input type="password" name="password" placeholder="Your password"
+            <input type="text" {...register('username')} placeholder="Your username"
+                  className="input input-bordered w-full max-w-lg rounded-lg"/>
+                        {errors.username && <span className="text-error text-xs font-medium">{errors.username.message}</span>}
+
+          </div>
+          <div className="my-3">
+            <input type="password" {...register('password')} placeholder="Your password"
                    className="input input-bordered w-full max-w-lg rounded-lg"/>
+                   {errors.password && <span className="text-error text-xs font-medium">{errors.password.message}</span>}
           </div>
           <div className="my-3">
             <div className="form-control">
               <label className="label justify-normal">
-                <input type="checkbox" name="terms" className="checkbox checkbox-primary mr-3"/>
+                <input type="checkbox" {...register('terms')} className="checkbox checkbox-primary mr-3"/>
                 <span className="label-text">I agree to the Terms of Service and Privacy Policy</span>
               </label>
+              {errors.terms && <span className="text-error text-xs font-medium">{errors.terms.message}</span>}
             </div>
           </div>
           <div className="my-3">
