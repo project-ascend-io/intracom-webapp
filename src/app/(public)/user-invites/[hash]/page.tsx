@@ -7,6 +7,7 @@ import InviteResponse from "@/components/invite-response";
 import { useInvite } from "@/hooks/use-invites";
 import SignupForm from "@/components/signup-form";
 import LoadingIndicator from "@/components/loading-indicator";
+const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 const ViewUserInvitePage = () => {
     const router = useRouter();
@@ -40,7 +41,7 @@ const ViewUserInvitePage = () => {
     if (invite?.state == InviteState.Denied) {
         const handleFeedbackSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
-            const updateInvite = await fetch('http://localhost:8080/user-invites/' + invite.hash, {
+            const updateInvite = await fetch(API_URL + '/user-invites/' + invite.hash, {
                 headers: { 'Content-Type': 'application/json' },
                 method: 'PATCH',
                 body: JSON.stringify({ state: InviteState.Denied })
@@ -86,7 +87,7 @@ const ViewUserInvitePage = () => {
         const handleSignupSubmit = async (formData: UserInviteForm) => {
             setIsLoading(true);
 
-            const updateInvite = await fetch('http://localhost:8080/user-invites/' + invite.hash, {
+            const updateInvite = await fetch(API_URL + '/user-invites/' + invite.hash, {
                 headers: { 'Content-Type': 'application/json' },
                 method: 'PATCH',
                 body: JSON.stringify({ state: InviteState.Accepted })
@@ -95,7 +96,7 @@ const ViewUserInvitePage = () => {
             if (!updateInvite.ok) {
                 throw new Error(`HTTP error! Status: ${updateInvite.status}`);
             }
-            const acceptedInvite = await fetch('http://localhost:8080/users/signup', {
+            const acceptedInvite = await fetch(API_URL + '/users/signup', {
                 headers: { 'Content-Type': 'application/json' },
                 method: 'POST',
                 body: JSON.stringify({
