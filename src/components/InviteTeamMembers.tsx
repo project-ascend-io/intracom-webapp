@@ -31,7 +31,7 @@ const InviteTeamMembers: React.FC<InviteTeamMembersProps> = ({
       <div className="flex items-center mb-4">
         <input
           type="text"
-          value="http://localhost:8065/signup_user_complete/?"
+          value="http://localhost:8065/signup-user-complete/?"
           readOnly
           className="border border-gray-300 rounded-l-lg p-2 w-full"
         />
@@ -39,7 +39,7 @@ const InviteTeamMembers: React.FC<InviteTeamMembersProps> = ({
           className="bg-blue-600 text-white p-2 rounded-r-lg"
           onClick={() =>
             navigator.clipboard.writeText(
-              "http://localhost:8065/signup_user_complete/?"
+              "http://localhost:8065/signup-user-complete/?"
             )
           }
         >
