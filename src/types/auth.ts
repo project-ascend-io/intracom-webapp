@@ -1,9 +1,3 @@
-export interface ResponseObject {
-  success: boolean;
-  message: string;
-  responseObject: any;
-  statusCode: number;
-}
 export type AuthContextType = {
   user: any;
   setUser: any;
