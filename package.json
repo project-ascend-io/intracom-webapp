@@ -17,19 +17,7 @@
     }
   },
   "lint-staged": {
-    "*.ts": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.tsx": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.js": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.jsx": [
+    "*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "eslint --fix"
     ]
@@ -58,10 +46,12 @@
     "globals": "^15.9.0",
     "husky": "^9.1.4",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.9",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.2.4",
     "typescript": "^5",
     "typescript-eslint": "^8.1.0"
   }

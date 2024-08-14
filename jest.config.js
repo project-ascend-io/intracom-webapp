@@ -1,17 +1,12 @@
-// module.exports = {
-//   testEnvironment: 'jsdom',
-//   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-//   moduleNameMapper: {
-//     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-//   },
-// };
+/* eslint-env node */
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'node',
+  testEnvironment: 'jest-environment-jsdom',
   roots: ['<rootDir>/src'],
   testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
 };
-
