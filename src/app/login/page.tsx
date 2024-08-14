@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Input from "@/components/input";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormType, loginSchema } from "@/types/login";
@@ -12,7 +12,6 @@ import { useAuth } from "@/context/auth";
 export default function Login() {
   const [authError, setAuthError] = useState("");
   const { user, setUser } = useAuth();
-  const router = useRouter();
 
   const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
     setAuthError("");
@@ -21,8 +20,6 @@ export default function Login() {
     if (res.success) {
       setUser(res.responseObject);
       reset();
-      //TODO: Redirect to user dashboard / homepage
-      router.push("/auth/download");
     } else {
       setAuthError(res.message);
     }
@@ -38,7 +35,7 @@ export default function Login() {
   });
 
   //if existing user, redirect to dashboard
-  if (user) return router.push("/auth/download");
+  if (user) return redirect("/auth/download");
 
   return (
     <section className="page-container">
