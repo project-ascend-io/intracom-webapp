@@ -10,7 +10,7 @@ export async function login(formData: LoginFormType) {
   const fetchParams = {
     method: "POST",
     endpoint: "/auth/login",
-    body: formData,
+    body: JSON.stringify(formData),
     errorMessage: "Failed to login user",
   };
 
