@@ -38,7 +38,7 @@ export default function Login() {
   if (user) return redirect("/auth/download");
 
   return (
-    <section className="container flex flex-col items-center p-20 ">
+    <section className="flex flex-col items-center p-20 w-full">
       <h1 className="text-2xl font-bold mb-4">Login</h1>
       {authError && (
         <div role="alert" className="alert alert-error w-full max-w-sm my-4">
@@ -58,7 +58,10 @@ export default function Login() {
           <span>{authError}</span>
         </div>
       )}
-      <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="flex flex-col gap-5 w-full max-w-sm"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Input
           name="email"
           type="email"
@@ -72,8 +75,10 @@ export default function Login() {
           placeholder="Enter your password"
           register={register}
           errors={errors}
-          helperText="Password must be at least 8 characters long and include one uppercase letter and one number"
         />
+        <button className="link link-primary font-bold self-start no-underline">
+          Forgot Password?
+        </button>
         <button className="btn btn-primary">Login</button>
       </form>
     </section>

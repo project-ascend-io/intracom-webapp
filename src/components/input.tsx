@@ -23,16 +23,14 @@ const Input: FC<InputProps> = ({
         </span>
       )}
       <input
-        className="input  border-gray-300 rounded-md input-primary focus:outline-none w-full max-w-sm"
+        className="input  border-gray-300 rounded-md input-primary focus:outline-none"
         id={name}
         type={type}
         {...register(name)}
         placeholder={placeholder}
       />
       {helperText && (
-        <span className="label text-xs text-gray-400 w-full max-w-sm">
-          {helperText}
-        </span>
+        <span className="label text-xs text-gray-400">{helperText}</span>
       )}
     </div>
   );
