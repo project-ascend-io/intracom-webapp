@@ -11,7 +11,9 @@ export default function Index() {
     <>
       <h1>Index Page</h1>
       <p>
-        <Link href="/login">Go to Login Page</Link>
+        <Link className="link link-primary" href="/login">
+          Go to Login Page
+        </Link>
       </p>
       {user && (
         <button
@@ -20,6 +22,7 @@ export default function Index() {
             setUser(null);
             router.push("/login");
           }}
+          className="btn btn-primary"
         >
           Logout
         </button>

@@ -38,10 +38,27 @@ export default function Login() {
   if (user) return redirect("/auth/download");
 
   return (
-    <section className="page-container">
-      <h1 className="title">Login</h1>
-      {authError && <p className="error">{authError}</p>}
-      <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
+    <section className="container flex flex-col items-center p-20 ">
+      <h1 className="text-2xl font-bold mb-4">Login</h1>
+      {authError && (
+        <div role="alert" className="alert alert-error w-full max-w-sm my-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>{authError}</span>
+        </div>
+      )}
+      <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
         <Input
           name="email"
           type="email"
@@ -57,7 +74,7 @@ export default function Login() {
           errors={errors}
           helperText="Password must be at least 8 characters long and include one uppercase letter and one number"
         />
-        <button className="form-button">Login</button>
+        <button className="btn btn-primary">Login</button>
       </form>
     </section>
   );
