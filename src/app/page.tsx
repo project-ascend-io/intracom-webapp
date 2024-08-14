@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -42,7 +42,7 @@ export default function Home() {
         </label>
         {/* link to download app */}
         <p className="text-sm py-4">
-          Don't have the Desktop app?{" "}
+          Don't have the Desktop app?{' '}
           <a href="#" className="text-[#0053D4]">
             Download the app now
           </a>

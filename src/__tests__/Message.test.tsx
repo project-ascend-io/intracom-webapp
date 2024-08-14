@@ -1,5 +1,5 @@
+// __tests__/Message.test.js
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect'; // Add this line
 import { toBeInTheDocument } from '@testing-library/jest-dom'; // Add this line
 
 expect.extend({ toBeInTheDocument }); // Add this line
