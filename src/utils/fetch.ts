@@ -10,18 +10,12 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
  * @param {object} body - object containing properties to be passed to API
  * @returns {ResponseObject} The response from the server
  */
-export async function fetchFromAPI({
-  endpoint,
-  body,
-  method,
-  errorMessage,
-}: FetchParametersType) {
+export async function fetchFromAPI(params: FetchParametersType) {
   try {
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
-      method: method,
+    const response = await fetch(`${BASE_URL}${params.endpoint}`, {
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
       credentials: "include",
+      ...params,
     });
 
     if (!response.ok) {
@@ -32,7 +26,7 @@ export async function fetchFromAPI({
           : JSON.parse(await response.text());
 
       console.error(
-        `Request operation failed ${response.status}: ${errorMessage}`,
+        `Request operation failed ${response.status}: ${params.errorMessage}`,
         errorBody
       );
       return errorBody;
@@ -41,7 +35,7 @@ export async function fetchFromAPI({
       return data;
     }
   } catch (error) {
-    console.error(errorMessage, error);
+    console.error(params.errorMessage, error);
 
     throw error;
   }

@@ -7,6 +7,6 @@ export interface ResponseObject {
 export type FetchParametersType = {
   method: string;
   endpoint: string;
-  body: any;
   errorMessage: string;
+  [key: string]: any;
 };
