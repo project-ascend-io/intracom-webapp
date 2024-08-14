@@ -10,13 +10,12 @@ type Props = {
 export default function AuthLayout({ children }: Props) {
   const [loading, setLoading] = useState(true);
   const { user, setUser } = useAuth();
-  console.log(!user);
+
   async function checkUserSession() {
     const data = await checkSession();
-    if (data?.success) {
-      setUser(data.responseObject);
-      setLoading(false);
-    }
+    if (data?.success) setUser(data.responseObject);
+
+    setLoading(false);
   }
   useEffect(() => {
     if (!user) checkUserSession();

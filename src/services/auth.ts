@@ -14,8 +14,6 @@ export async function login(formData: LoginFormType) {
     errorMessage: "Failed to login user",
   };
 
-  console.log("login FETCH Params", fetchParams);
-
   const data = await fetchFromAPI(fetchParams);
 
   if (data.success)
@@ -34,8 +32,6 @@ export async function checkSession() {
     endpoint: "/auth/check",
     errorMessage: "Failed to validate user session",
   };
-
-  console.log("check FETCH Params", fetchParams);
 
   const data = await fetchFromAPI(fetchParams);
 
@@ -56,8 +52,6 @@ export async function logout() {
     endpoint: "/auth/logout",
     errorMessage: "Failed to logout user",
   };
-
-  console.log("logout FETCH Params", fetchParams);
 
   const data = await fetchFromAPI(fetchParams);
 

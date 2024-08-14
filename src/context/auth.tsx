@@ -5,9 +5,10 @@ import { AuthContextType, AuthUserType, AuthProviderType } from "../types/auth";
 const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }: AuthProviderType) {
-  const userObject = JSON.parse(localStorage.getItem("user") || "");
+  const userString = localStorage.getItem("intracom-user") || "";
+  const userObject = userString.length ? JSON.parse(userString) : null;
 
-  const [user, setUser] = useState<AuthUserType | null>(userObject || null);
+  const [user, setUser] = useState<AuthUserType | null>(userObject);
 
   const expires = userObject?.expires;
 
