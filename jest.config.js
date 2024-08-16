@@ -1,7 +1,7 @@
 /* eslint-env node */
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'jsdom',
   roots: ['<rootDir>/src'],
   testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
   transform: {
