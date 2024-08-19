@@ -3,12 +3,16 @@
     "next",
     "prettier",
     "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended"
   ],
-
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "globals": {
     "module": "readonly"
+  },
+  "rules": {
+    "@typescript-eslint/no-explicit-any": 2,
+    "prettier/prettier": "error"
   }
 }

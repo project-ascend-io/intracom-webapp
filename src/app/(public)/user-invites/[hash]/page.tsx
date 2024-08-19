@@ -23,14 +23,14 @@ const ViewUserInvitePage = () => {
     // @todo - Leverage React ErrorBoundary or NextJS Error pages.
     return (
       <>
-        <div className="container mx-auto md:w-9/12">
-          <div className="text-center mb-12 md:mb-6">
-            <h1 className="mt-6 mb-2 text-xl font-bold">{error.message}</h1>
+        <div className='container mx-auto md:w-9/12'>
+          <div className='mb-12 text-center md:mb-6'>
+            <h1 className='mb-2 mt-6 text-xl font-bold'>{error.message}</h1>
             {/* <p>Before completing your request, can you provide feedback on why you&apos;ve denied the
                           invitation?</p> */}
           </div>
-          <div className="mx-auto text-center w-80">
-            <a href="/">Click here to go home</a>
+          <div className='mx-auto w-80 text-center'>
+            <a href='/'>Click here to go home</a>
           </div>
         </div>
       </>
@@ -39,7 +39,7 @@ const ViewUserInvitePage = () => {
 
   if (invite?.state == InviteState.Denied) {
     const handleFeedbackSubmit = async (
-      event: React.FormEvent<HTMLFormElement>,
+      event: React.FormEvent<HTMLFormElement>
     ) => {
       event.preventDefault();
       const updateInvite = await fetch(
@@ -48,7 +48,7 @@ const ViewUserInvitePage = () => {
           headers: { 'Content-Type': 'application/json' },
           method: 'PATCH',
           body: JSON.stringify({ state: InviteState.Denied }),
-        },
+        }
       );
 
       if (!updateInvite.ok) {
@@ -59,9 +59,9 @@ const ViewUserInvitePage = () => {
 
     return (
       <>
-        <div className="container mx-auto md:w-9/12">
-          <div className="text-center mb-12 md:mb-6">
-            <h1 className="mt-6 mb-2 text-xl font-bold">
+        <div className='container mx-auto md:w-9/12'>
+          <div className='mb-12 text-center md:mb-6'>
+            <h1 className='mb-2 mt-6 text-xl font-bold'>
               Thank you for updating the invitation.
             </h1>
             <p>
@@ -69,7 +69,7 @@ const ViewUserInvitePage = () => {
               you&apos;ve denied the invitation?
             </p>
           </div>
-          <div className="mx-auto w-80">
+          <div className='mx-auto w-80'>
             <FeedbackForm
               onSubmit={handleFeedbackSubmit}
               isLoading={isLoading}
@@ -92,7 +92,7 @@ const ViewUserInvitePage = () => {
                 ...prevInvite,
                 state: hasAccepted ? InviteState.Accepted : InviteState.Denied,
               }
-            : null,
+            : null
         );
         setIsLoading(false);
       }, 750);
@@ -116,7 +116,7 @@ const ViewUserInvitePage = () => {
           headers: { 'Content-Type': 'application/json' },
           method: 'PATCH',
           body: JSON.stringify({ state: InviteState.Accepted }),
-        },
+        }
       );
 
       if (!updateInvite.ok) {

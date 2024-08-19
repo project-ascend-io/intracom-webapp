@@ -78,7 +78,7 @@ export const UserSignUpSchema = z.object({
     .boolean()
     .refine(
       (value: boolean) => value === true,
-      'You must agree to the Terms of Service and Privacy Policy.',
+      'You must agree to the Terms of Service and Privacy Policy.'
     ),
 });
 

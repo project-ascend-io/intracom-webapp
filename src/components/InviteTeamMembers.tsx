@@ -16,27 +16,27 @@ const InviteTeamMembers: React.FC<InviteTeamMembersProps> = ({ prevStep }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8">
-      <button onClick={prevStep} className="text-blue-600 text-sm mb-4 block">
+    <div className='rounded-lg bg-white p-8 shadow-lg'>
+      <button onClick={prevStep} className='mb-4 block text-sm text-blue-600'>
         &lt; Previous
       </button>
-      <h1 className="text-2xl font-bold mb-4">Invite your team members</h1>
-      <p className="text-gray-600 mb-6">
+      <h1 className='mb-4 text-2xl font-bold'>Invite your team members</h1>
+      <p className='mb-6 text-gray-600'>
         Collaboration is tough by yourself. Invite a few team members using the
         invitation link below.
       </p>
-      <div className="flex items-center mb-4">
+      <div className='mb-4 flex items-center'>
         <input
-          type="text"
-          value="http://localhost:8065/signup_user_complete/?"
+          type='text'
+          value='http://localhost:8065/signup_user_complete/?'
           readOnly
-          className="border border-gray-300 rounded-l-lg p-2 w-full"
+          className='w-full rounded-l-lg border border-gray-300 p-2'
         />
         <button
-          className="bg-blue-600 text-white p-2 rounded-r-lg"
+          className='rounded-r-lg bg-blue-600 p-2 text-white'
           onClick={() =>
             navigator.clipboard.writeText(
-              'http://localhost:8065/signup_user_complete/?',
+              'http://localhost:8065/signup_user_complete/?'
             )
           }
         >
@@ -44,7 +44,7 @@ const InviteTeamMembers: React.FC<InviteTeamMembersProps> = ({ prevStep }) => {
         </button>
       </div>
       <button
-        className="bg-blue-600 text-white w-full py-2 rounded-lg"
+        className='w-full rounded-lg bg-blue-600 py-2 text-white'
         onClick={finishSetup} // Use the finishSetup function here
       >
         Finish setup

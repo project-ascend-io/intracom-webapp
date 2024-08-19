@@ -32,7 +32,7 @@ const SignupUserComplete: FC = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+    <div className='flex h-screen flex-col items-center justify-center bg-gray-50 p-4'>
       {renderStep()}
     </div>
   );

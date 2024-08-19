@@ -16,7 +16,7 @@ const EmailForm: React.FC = () => {
   const [success, setSuccess] = useState<string>('');
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -47,8 +47,8 @@ const EmailForm: React.FC = () => {
         <label>
           Name:
           <input
-            type="text"
-            name="name"
+            type='text'
+            name='name'
             value={formData.name}
             onChange={handleChange}
             required
@@ -58,8 +58,8 @@ const EmailForm: React.FC = () => {
         <label>
           Email:
           <input
-            type="email"
-            name="email"
+            type='email'
+            name='email'
             value={formData.email}
             onChange={handleChange}
             required
@@ -69,18 +69,18 @@ const EmailForm: React.FC = () => {
         <label>
           Message:
           <textarea
-            name="message"
+            name='message'
             value={formData.message}
             onChange={handleChange}
             required
           />
         </label>
         <br />
-        <button type="submit">Send Email</button>
+        <button type='submit'>Send Email</button>
       </form>
       <p>
         If you encounter any issues, please contact our support at{' '}
-        <a href="mailto:support@example.com">support@example.com</a>.
+        <a href='mailto:support@example.com'>support@example.com</a>.
       </p>
     </div>
   );
