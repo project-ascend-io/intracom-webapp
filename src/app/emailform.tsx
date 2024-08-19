@@ -30,13 +30,6 @@ const EmailForm: React.FC = () => {
     }
 
     try {
-      const templateParams = {
-        name: formData.name,
-        message: formData.message,
-        email: formData.email,
-        link: `http://your-frontend-url/setup?email=${encodeURIComponent(formData.email)}`,
-      };
-
       setSuccess('Email sent successfully!');
       setError('');
     } catch (err) {

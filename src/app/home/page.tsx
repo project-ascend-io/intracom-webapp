@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
           Where would you like to view this?
         </h1>
         <p className="text-sm py-3">
-          You can view Mattermost in the desktop app or continue in your own web
+          You can view Intracom in the desktop app or continue in your own web
           browser.
         </p>
         <div className="py-2 flex">
@@ -42,7 +42,7 @@ export default function Home() {
         </label>
         {/* link to download app */}
         <p className="text-sm py-4">
-          Don't have the Desktop app?{" "}
+          Don&apos;t have the Desktop app?{' '}
           <a href="#" className="text-[#0053D4]">
             Download the app now
           </a>

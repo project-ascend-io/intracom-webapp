@@ -1,7 +1,7 @@
-"use client";
+'use client';
 const api_url = process.env.NEXT_PUBLIC_API_URL as string;
-import Image from "next/image";
-import React, { useState, FC, ChangeEvent, FormEvent } from "react";
+import Image from 'next/image';
+import React, { useState, FC, FormEvent } from 'react';
 
 interface OrganizationPageProps {
   nextStep: () => void;
@@ -14,35 +14,35 @@ interface OrganizationData {
 
 // Function to register an organization
 async function registerOrganization(
-  organizationData: OrganizationData
-): Promise<any> {
+  organizationData: OrganizationData,
+): Promise<object> {
   const response = await fetch(`${api_url}/users`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(organizationData),
   });
 
   if (!response.ok) {
-    throw new Error("Failed to register organization");
+    throw new Error('Failed to register organization');
   }
 
   return response.json();
 }
 
 const OrganizationPage: FC<OrganizationPageProps> = ({ nextStep }) => {
-  const [organizationName, setOrganizationName] = useState<string>("");
+  const [organizationName, setOrganizationName] = useState<string>('');
 
   // Handles the form submission and calls the registerOrganization function
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
       const data = await registerOrganization({ name: organizationName });
-      console.log("Organization registered:", data);
+      console.log('Organization registered:', data);
       nextStep(); // Proceed to the next step after successful registration
     } catch (error) {
-      console.error("Error registering organization:", error);
+      console.error('Error registering organization:', error);
     }
   };
 

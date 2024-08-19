@@ -1,5 +1,5 @@
-import Image from "next/image";
-import React, { useState, FC } from "react";
+import Image from 'next/image';
+import React, { useState, FC } from 'react';
 
 interface ToolsUsedProps {
   nextStep: () => void;
@@ -18,16 +18,16 @@ const ToolsUsed: FC<ToolsUsedProps> = ({ nextStep, prevStep }) => {
     setSelectedTools((prevSelectedTools) =>
       prevSelectedTools.includes(toolName)
         ? prevSelectedTools.filter((tool) => tool !== toolName)
-        : [...prevSelectedTools, toolName]
+        : [...prevSelectedTools, toolName],
     );
   };
 
   const tools: Tool[] = [
-    { name: "GitHub", src: "/github.png" },
-    { name: "GitLab", src: "/gitlab.png" },
-    { name: "Jira", src: "/jira.png" },
-    { name: "Zoom", src: "/zoom.png" },
-    { name: "ServiceNow", src: "/service.png" },
+    { name: 'GitHub', src: '/github.png' },
+    { name: 'GitLab', src: '/gitlab.png' },
+    { name: 'Jira', src: '/jira.png' },
+    { name: 'Zoom', src: '/zoom.png' },
+    { name: 'ServiceNow', src: '/service.png' },
   ];
 
   return (
@@ -40,15 +40,15 @@ const ToolsUsed: FC<ToolsUsedProps> = ({ nextStep, prevStep }) => {
         </div>
         <h1 className="text-3xl font-bold mb-4">What tools do you use?</h1>
         <p className="text-gray-600 text-sm mb-6 px-24">
-          Choose the tools you work with, and we'll add them to your workspace.
-          Additional setup may be needed later.
+          Choose the tools you work with, and we&apos;ll add them to your
+          workspace. Additional setup may be needed later.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols- lg:grid-cols-5 gap-4 mb-6">
           {tools.map((tool) => (
             <div
               key={tool.name}
               className={`border p-2 w-[90px] h-[70px] rounded-lg shadow-md ${
-                selectedTools.includes(tool.name) ? "bg-blue-300" : ""
+                selectedTools.includes(tool.name) ? 'bg-blue-300' : ''
               }`}
               onClick={() => toggleToolSelection(tool.name)}
             >
@@ -58,7 +58,7 @@ const ToolsUsed: FC<ToolsUsedProps> = ({ nextStep, prevStep }) => {
         </div>
         <p className="text-gray-600 text-sm mb-6 px-24">
           More tools can be added once your workspace is setup. To see all
-          available integration,{" "}
+          available integration,{' '}
           <a href="#">
             <span className="text-blue-600">visit the marketplace.</span>
           </a>

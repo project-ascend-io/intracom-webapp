@@ -1,20 +1,19 @@
-"use client";
+'use client';
 const api_url = process.env.NEXT_PUBLIC_API_URL as string;
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import Image from "next/image";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import { useRouter } from "next/navigation";
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import Image from 'next/image';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
 
 const SignupUserComplete: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [password, setPassword] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [error, setError] = useState<string>(""); // Explicitly type 'error' as a string
-  const [emailError, setEmailError] = useState<string>("");
-  const [usernameError, setUsernameError] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<string>("");
-  const [organization, setOrganization] = useState<string>("");
+  const [password, setPassword] = useState<string>('');
+  const [userName, setUserName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [emailError, setEmailError] = useState<string>('');
+  const [usernameError, setUsernameError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
+  const [organization, setOrganization] = useState<string>('');
   const router = useRouter();
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -62,22 +61,21 @@ const SignupUserComplete: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
-    setEmailError("");
-    setUsernameError("");
-    setPasswordError("");
+    setEmailError('');
+    setUsernameError('');
+    setPasswordError('');
 
     let isValid = true;
     if (!validateEmail(email)) {
-      setEmailError("Invalid email format.");
+      setEmailError('Invalid email format.');
       isValid = false;
     }
     if (!validateUsername(userName)) {
-      setUsernameError("Username must be 3-15 characters long.");
+      setUsernameError('Username must be 3-15 characters long.');
       isValid = false;
     }
     if (!validatePassword(password)) {
-      setPasswordError("Password must be 8-64 characters long.");
+      setPasswordError('Password must be 8-64 characters long.');
       isValid = false;
     }
 
@@ -87,9 +85,9 @@ const SignupUserComplete: React.FC = () => {
 
     try {
       const response = await fetch(`${api_url}/users`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email,
@@ -100,24 +98,23 @@ const SignupUserComplete: React.FC = () => {
       });
 
       if (!response.ok) {
-        console.error("Error:", response.status, response.statusText);
+        console.error('Error:', response.status, response.statusText);
         throw new Error(
-          `Failed to create account: ${response.status} ${response.statusText}`
+          `Failed to create account: ${response.status} ${response.statusText}`,
         );
       } else {
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-          console.log("Success:", await response.json());
-          router.push("successful");
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+          console.log('Success:', await response.json());
+          router.push('successful');
         } else {
-          console.log("Received non-JSON response");
+          console.log('Received non-JSON response');
           const textResponse = await response.text();
-          console.log("Response body:", textResponse);
+          console.log('Response body:', textResponse);
         }
       }
     } catch (error) {
-      console.error("Error:", error);
-      // setError(error.message);
+      console.error('Error:', error);
     }
   };
 
@@ -192,7 +189,7 @@ const SignupUserComplete: React.FC = () => {
               </div>
               <div className="mb-4 relative">
                 <input
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="Choose a Password"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   required
@@ -231,7 +228,7 @@ const SignupUserComplete: React.FC = () => {
 
               <p className="mt-4 text-sm  text-gray-600">
                 Interested in receiving Intracom security, product, promotions,
-                and company updates via newsletter? Sign up at{" "}
+                and company updates via newsletter? Sign up at{' '}
                 <a
                   href="https://intracom.com/security-updates/"
                   className="text-blue-600 underline"
@@ -249,14 +246,14 @@ const SignupUserComplete: React.FC = () => {
             </form>
             <p className="mt-4 text-sm text-center text-gray-600">
               By proceeding to create your account and use Intracom, you agree
-              to our{" "}
+              to our{' '}
               <a
                 href="https://intracom.com/terms-of-use/"
                 className="text-blue-600 underline"
               >
                 Terms of Use
-              </a>{" "}
-              and{" "}
+              </a>{' '}
+              and{' '}
               <a
                 href="https://intracom.com/privacy-policy/"
                 className="text-blue-600 underline"

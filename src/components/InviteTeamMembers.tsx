@@ -1,21 +1,18 @@
-"use client";
-import React from "react";
-import { useRouter } from "next/navigation";
+'use client';
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
 interface InviteTeamMembersProps {
   nextStep: () => void;
   prevStep: () => void;
 }
 
-const InviteTeamMembers: React.FC<InviteTeamMembersProps> = ({
-  nextStep,
-  prevStep,
-}) => {
+const InviteTeamMembers: React.FC<InviteTeamMembersProps> = ({ prevStep }) => {
   const router = useRouter(); // Initialize useRouter
 
   const finishSetup = () => {
     // More logic here (if any) before redirecting
-    router.push("/dashboard"); // Use router.push to navigate
+    router.push('/dashboard'); // Use router.push to navigate
   };
 
   return (
@@ -39,7 +36,7 @@ const InviteTeamMembers: React.FC<InviteTeamMembersProps> = ({
           className="bg-blue-600 text-white p-2 rounded-r-lg"
           onClick={() =>
             navigator.clipboard.writeText(
-              "http://localhost:8065/signup_user_complete/?"
+              'http://localhost:8065/signup_user_complete/?',
             )
           }
         >

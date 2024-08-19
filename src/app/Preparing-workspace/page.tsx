@@ -1,8 +1,8 @@
-"use client";
-import InviteTeamMembers from "@/components/InviteTeamMembers";
-import OrganizationPage from "@/components/OrganizationPage";
-import ToolsUsed from "@/components/ToolsUsed";
-import React, { useState, FC } from "react";
+'use client';
+import InviteTeamMembers from '@/components/InviteTeamMembers';
+import OrganizationPage from '@/components/OrganizationPage';
+import ToolsUsed from '@/components/ToolsUsed';
+import React, { useState, FC } from 'react';
 
 // Define the possible steps
 type Step = 1 | 2 | 3;
