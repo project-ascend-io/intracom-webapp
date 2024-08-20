@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "lib": ["dom", "dom.iterable", "esnext"],
     "types": ["jest", "@testing-library/jest-dom"],
     "allowJs": true,
@@ -28,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "jest.config.ts"
+    "jest.config.js"
   ],
   "exclude": ["node_modules"]
 }
