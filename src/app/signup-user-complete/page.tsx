@@ -15,25 +15,8 @@ const SignupUserComplete: React.FC = () => {
     formState: { errors },
    } = useForm<AdminSignUpForm>({ resolver: zodResolver(AdminSignupFormSchema) });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [password, setPassword] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [error, setError] = useState<string>(""); // Explicitly type 'error' as a string
-  const [emailError, setEmailError] = useState<string>("");
-  const [usernameError, setUsernameError] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<string>("");
-  const [organization, setOrganization] = useState<string>("");
-  const router = useRouter();
 
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-  const handleUserNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value);
-  };
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -45,91 +28,45 @@ const SignupUserComplete: React.FC = () => {
     return regex.test(email);
   };
 
-  const validateUsername = (username: string) => {
-    const minLength = 3;
-    const maxLength = 30;
-    const regex = /^[a-zA-Z0-9_]+$/;
-    return (
-      regex.test(username) &&
-      username.length >= minLength &&
-      username.length <= maxLength
-    );
+
+  const onSubmit: SubmitHandler<AdminSignUpForm> = async ({email, userName, password, organization}: AdminSignUpForm) => {
+    
+    try {
+      const response = await fetch(`${api_url}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          username: userName,
+          password,
+          organization,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Error:", response.status, response.statusText);
+        throw new Error(
+          `Failed to create account: ${response.status} ${response.statusText}`
+        );
+      } else {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+          console.log("Success:", await response.json());
+          router.push("successful");
+        } else {
+          console.log("Received non-JSON response");
+          const textResponse = await response.text();
+          console.log("Response body:", textResponse);
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      // setError(error.message);
+    }
   };
 
-  const validatePassword = (password: string) => {
-    const minLength = 8;
-    const maxLength = 64;
-    const regex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return (
-      regex.test(password) &&
-      password.length >= minLength &&
-      password.length <= maxLength
-    );
-  };
-
-  // const handleSubmit = async (e: FormEvent) => {
-  //   e.preventDefault();
-  //   setError("");
-  //   setEmailError("");
-  //   setUsernameError("");
-  //   setPasswordError("");
-
-  //   let isValid = true;
-  //   if (!validateEmail(email)) {
-  //     setEmailError("Invalid email format.");
-  //     isValid = false;
-  //   }
-  //   if (!validateUsername(userName)) {
-  //     setUsernameError("Username must be 3-15 characters long.");
-  //     isValid = false;
-  //   }
-  //   if (!validatePassword(password)) {
-  //     setPasswordError("Password must be 8-64 characters long.");
-  //     isValid = false;
-  //   }
-
-  //   if (!isValid) {
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await fetch(`${api_url}/users`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         email,
-  //         username: userName,
-  //         password,
-  //         organization,
-  //       }),
-  //     });
-
-  //     if (!response.ok) {
-  //       console.error("Error:", response.status, response.statusText);
-  //       throw new Error(
-  //         `Failed to create account: ${response.status} ${response.statusText}`
-  //       );
-  //     } else {
-  //       const contentType = response.headers.get("content-type");
-  //       if (contentType && contentType.indexOf("application/json") !== -1) {
-  //         console.log("Success:", await response.json());
-  //         router.push("successful");
-  //       } else {
-  //         console.log("Received non-JSON response");
-  //         const textResponse = await response.text();
-  //         console.log("Response body:", textResponse);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     // setError(error.message);
-  //   }
-  // };
-
-  const onSubmit: SubmitHandler<AdminSignUpForm> = (data) => console.log(data);
 
   return (
     <div className="flex flex-row items-center justify-center min-h-screen bg-gray-50">
@@ -184,12 +121,12 @@ const SignupUserComplete: React.FC = () => {
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   {...register("userName")}
                 />
-                {userName && (
+                {/* {userName && (
                   <label className="text-xs text-gray-400 mb-4">
                     You can use lowercase numbers, letters, periods, dashes, and
                     underscores.
                   </label>
-                )}
+                )} */}
                 {errors.userName && (
                   <p className="text-red-500 text-xs italic">{errors.userName.message}</p>
                 )}
@@ -208,11 +145,11 @@ const SignupUserComplete: React.FC = () => {
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
-                {password && (
+                {/* {password && (
                   <label className="text-xs text-gray-400 mb-4">
                     Must be 8-64 characters long.
                   </label>
-                )}
+                )} */}
                 {errors.password && (
                   <p className="text-red-500 text-xs italic">{errors.password.message}</p>
                 )}
