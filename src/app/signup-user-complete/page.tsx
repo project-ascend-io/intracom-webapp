@@ -4,8 +4,16 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { AdminSignUpForm, AdminSignupFormSchema } from "./types";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const SignupUserComplete: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+   } = useForm<AdminSignUpForm>({ resolver: zodResolver(AdminSignupFormSchema) });
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
@@ -60,66 +68,68 @@ const SignupUserComplete: React.FC = () => {
     );
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setEmailError("");
-    setUsernameError("");
-    setPasswordError("");
+  // const handleSubmit = async (e: FormEvent) => {
+  //   e.preventDefault();
+  //   setError("");
+  //   setEmailError("");
+  //   setUsernameError("");
+  //   setPasswordError("");
 
-    let isValid = true;
-    if (!validateEmail(email)) {
-      setEmailError("Invalid email format.");
-      isValid = false;
-    }
-    if (!validateUsername(userName)) {
-      setUsernameError("Username must be 3-15 characters long.");
-      isValid = false;
-    }
-    if (!validatePassword(password)) {
-      setPasswordError("Password must be 8-64 characters long.");
-      isValid = false;
-    }
+  //   let isValid = true;
+  //   if (!validateEmail(email)) {
+  //     setEmailError("Invalid email format.");
+  //     isValid = false;
+  //   }
+  //   if (!validateUsername(userName)) {
+  //     setUsernameError("Username must be 3-15 characters long.");
+  //     isValid = false;
+  //   }
+  //   if (!validatePassword(password)) {
+  //     setPasswordError("Password must be 8-64 characters long.");
+  //     isValid = false;
+  //   }
 
-    if (!isValid) {
-      return;
-    }
+  //   if (!isValid) {
+  //     return;
+  //   }
 
-    try {
-      const response = await fetch(`${api_url}/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          username: userName,
-          password,
-          organization,
-        }),
-      });
+  //   try {
+  //     const response = await fetch(`${api_url}/users`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email,
+  //         username: userName,
+  //         password,
+  //         organization,
+  //       }),
+  //     });
 
-      if (!response.ok) {
-        console.error("Error:", response.status, response.statusText);
-        throw new Error(
-          `Failed to create account: ${response.status} ${response.statusText}`
-        );
-      } else {
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-          console.log("Success:", await response.json());
-          router.push("successful");
-        } else {
-          console.log("Received non-JSON response");
-          const textResponse = await response.text();
-          console.log("Response body:", textResponse);
-        }
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      // setError(error.message);
-    }
-  };
+  //     if (!response.ok) {
+  //       console.error("Error:", response.status, response.statusText);
+  //       throw new Error(
+  //         `Failed to create account: ${response.status} ${response.statusText}`
+  //       );
+  //     } else {
+  //       const contentType = response.headers.get("content-type");
+  //       if (contentType && contentType.indexOf("application/json") !== -1) {
+  //         console.log("Success:", await response.json());
+  //         router.push("successful");
+  //       } else {
+  //         console.log("Received non-JSON response");
+  //         const textResponse = await response.text();
+  //         console.log("Response body:", textResponse);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     // setError(error.message);
+  //   }
+  // };
+
+  const onSubmit: SubmitHandler<AdminSignUpForm> = (data) => console.log(data);
 
   return (
     <div className="flex flex-row items-center justify-center min-h-screen bg-gray-50">
@@ -152,7 +162,7 @@ const SignupUserComplete: React.FC = () => {
           </div>
 
           <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <h1 className="text-2xl font-bold py-4">Create your account</h1>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
@@ -161,13 +171,10 @@ const SignupUserComplete: React.FC = () => {
                 <input
                   type="email"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  required
-                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                  value={email}
-                  onChange={handleEmailChange}
+                  {...register("email")}
                 />
-                {emailError && (
-                  <p className="text-red-500 text-xs italic">{emailError}</p>
+                {errors.email && (
+                  <p className="text-red-500 text-xs italic">{errors.email.message}</p>
                 )}
               </div>
               <div className="mb-4">
@@ -175,10 +182,7 @@ const SignupUserComplete: React.FC = () => {
                   type="text"
                   placeholder="Choose a Username"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  required
-                  pattern="^[a-z0-9_-]{3,15}$"
-                  value={userName}
-                  onChange={handleUserNameChange}
+                  {...register("userName")}
                 />
                 {userName && (
                   <label className="text-xs text-gray-400 mb-4">
@@ -186,8 +190,8 @@ const SignupUserComplete: React.FC = () => {
                     underscores.
                   </label>
                 )}
-                {usernameError && (
-                  <p className="text-red-500 text-xs italic">{usernameError}</p>
+                {errors.userName && (
+                  <p className="text-red-500 text-xs italic">{errors.userName.message}</p>
                 )}
               </div>
               <div className="mb-4 relative">
@@ -195,10 +199,7 @@ const SignupUserComplete: React.FC = () => {
                   type={showPassword ? "text" : "password"}
                   placeholder="Choose a Password"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  required
-                  pattern=".{8,64}"
-                  value={password}
-                  onChange={handlePasswordChange}
+                  {...register("password")}
                 />
                 <button
                   type="button"
@@ -212,8 +213,8 @@ const SignupUserComplete: React.FC = () => {
                     Must be 8-64 characters long.
                   </label>
                 )}
-                {passwordError && (
-                  <p className="text-red-500 text-xs italic">{passwordError}</p>
+                {errors.password && (
+                  <p className="text-red-500 text-xs italic">{errors.password.message}</p>
                 )}
               </div>
               <label className="block text-sm font-medium text-gray-700">
@@ -223,12 +224,11 @@ const SignupUserComplete: React.FC = () => {
                 type="text"
                 placeholder="Research Corp"
                 className="border border-gray-300 rounded-md p-2 w-full mb-4"
-                value={organization}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setOrganization(e.target.value)
-                }
+                {...register("organization")}
               />
-
+                {errors.organization && (
+                  <p className="text-red-500 text-xs italic">{errors.organization.message}</p>
+                )}
               <p className="mt-4 text-sm  text-gray-600">
                 Interested in receiving Intracom security, product, promotions,
                 and company updates via newsletter? Sign up at{" "}
