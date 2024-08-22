@@ -12,22 +12,18 @@ const SignupUserComplete: React.FC = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
    } = useForm<AdminSignUpForm>({ resolver: zodResolver(AdminSignupFormSchema) });
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+   const [showPassword, setShowPassword] = useState<boolean>(false);
+   const userName = watch('userName');
+   const password = watch('password');
 
   const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
-  const validateEmail = (email: string) => {
-    const regex =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regex.test(email);
-  };
-
 
   const onSubmit: SubmitHandler<AdminSignUpForm> = async ({email, userName, password, organization}: AdminSignUpForm) => {
     
@@ -121,12 +117,12 @@ const SignupUserComplete: React.FC = () => {
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   {...register("userName")}
                 />
-                {/* {userName && (
+                {!errors.userName && userName && (
                   <label className="text-xs text-gray-400 mb-4">
                     You can use lowercase numbers, letters, periods, dashes, and
                     underscores.
                   </label>
-                )} */}
+                )}
                 {errors.userName && (
                   <p className="text-red-500 text-xs italic">{errors.userName.message}</p>
                 )}
@@ -145,11 +141,11 @@ const SignupUserComplete: React.FC = () => {
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
-                {/* {password && (
+                {!errors.password && password && (
                   <label className="text-xs text-gray-400 mb-4">
                     Must be 8-64 characters long.
                   </label>
-                )} */}
+                )}
                 {errors.password && (
                   <p className="text-red-500 text-xs italic">{errors.password.message}</p>
                 )}
