@@ -12,7 +12,8 @@ export const AdminSignupFormSchema = z.object({
         .string()
         .min(1, "Username is required")
         .regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
-    organization: z.string().min(3).max(50)
+    organization: z.string().min(3).max(50),
+    instanceUrl: z.string().url({ message: "Please provide a valid url."})
 });
 
 export type AdminSignUpForm = z.infer<typeof AdminSignupFormSchema>;

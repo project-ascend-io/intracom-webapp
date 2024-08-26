@@ -25,7 +25,7 @@ const SignupUserComplete: React.FC = () => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit: SubmitHandler<AdminSignUpForm> = async ({email, userName, password, organization}: AdminSignUpForm) => {
+  const onSubmit: SubmitHandler<AdminSignUpForm> = async ({email, userName, password, organization, instanceUrl}: AdminSignUpForm) => {
     
     try {
       const response = await fetch(`${api_url}/users`, {
@@ -38,6 +38,7 @@ const SignupUserComplete: React.FC = () => {
           username: userName,
           password,
           organization,
+          instanceUrl
         }),
       });
 
@@ -111,6 +112,9 @@ const SignupUserComplete: React.FC = () => {
                 )}
               </div>
               <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                  Username
+                </label>
                 <input
                   type="text"
                   placeholder="Choose a Username"
@@ -128,6 +132,9 @@ const SignupUserComplete: React.FC = () => {
                 )}
               </div>
               <div className="mb-4 relative">
+              <label className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Choose a Password"
@@ -150,18 +157,33 @@ const SignupUserComplete: React.FC = () => {
                   <p className="text-red-500 text-xs italic">{errors.password.message}</p>
                 )}
               </div>
+              <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
                 What’s the name of your organization?
               </label>
               <input
                 type="text"
                 placeholder="Research Corp"
-                className="border border-gray-300 rounded-md p-2 w-full mb-4"
+                className="border border-gray-300 rounded-md p-2 w-full"
                 {...register("organization")}
               />
                 {errors.organization && (
                   <p className="text-red-500 text-xs italic">{errors.organization.message}</p>
                 )}
+              </div>
+                <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Instance Url
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  {...register("instanceUrl")}
+                />
+                {errors.instanceUrl && (
+                  <p className="text-red-500 text-xs italic">{errors.instanceUrl.message}</p>
+                )}
+              </div>
               <p className="mt-4 text-sm  text-gray-600">
                 Interested in receiving Intracom security, product, promotions,
                 and company updates via newsletter? Sign up at{" "}
