@@ -6,8 +6,6 @@ import {
 } from '@/app/(public)/user-invites/[hash]/types';
 const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
-
-
 export const useInvite = ({ hash }: UserInviteParams) => {
   const [invite, setInvite] = useState<Invitation | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);

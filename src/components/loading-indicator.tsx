@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 const LoadingIndicator: React.FC = () => (
-  <div className="flex flex-col justify-center items-center my-60">
-    <span className="loading loading-spinner loading-lg"></span>
+  <div className='my-60 flex flex-col items-center justify-center'>
+    <span className='loading loading-spinner loading-lg'></span>
   </div>
 );
 
