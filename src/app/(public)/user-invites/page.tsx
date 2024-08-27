@@ -1,7 +1,7 @@
 export default function UserInvitePage() {
-  return (
-    <>
-      <h1>User Invite Page</h1>
-    </>
-  );
-}
+    return (
+        <>
+            <h1>User Invite Page</h1>
+        </>
+    )
+};
