@@ -33,7 +33,7 @@ export default function ViewUserListPage() {
           {userData &&
             userData.map((data) => {
               return (
-                <tr>
+                <tr key={data.id}>
                   <td>
                     {data.firstName} {data.lastName}
                   </td>

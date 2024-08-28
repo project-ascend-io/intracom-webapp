@@ -44,7 +44,7 @@ export interface UserInviteParams extends Params {
 export interface ApiResponseWrapper {
   success: boolean;
   message: string;
-  responseObject: {} | null;
+  responseObject: object | null;
   statusCode: number;
 }
 
