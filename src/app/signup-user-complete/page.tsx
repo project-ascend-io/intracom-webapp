@@ -1,4 +1,5 @@
 "use client";
+const app_url = process.env.APP_URL as string;
 const api_url = process.env.NEXT_PUBLIC_API_URL as string;
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
@@ -184,17 +185,6 @@ const SignupUserComplete: React.FC = () => {
                   <p className="text-red-500 text-xs italic">{errors.instanceUrl.message}</p>
                 )}
               </div>
-              <p className="mt-4 text-sm  text-gray-600">
-                Interested in receiving Intracom security, product, promotions,
-                and company updates via newsletter? Sign up at{" "}
-                <a
-                  href="https://intracom.com/security-updates/"
-                  className="text-blue-600 underline"
-                >
-                  https://intracom.com/security-updates/
-                </a>
-                .
-              </p>
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white my-4 py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
@@ -206,19 +196,19 @@ const SignupUserComplete: React.FC = () => {
               By proceeding to create your account and use Intracom, you agree
               to our{" "}
               <a
-                href="https://intracom.com/terms-of-use/"
+                href={`${app_url}/terms-of-use/`}
                 className="text-blue-600 underline"
               >
                 Terms of Use
               </a>{" "}
               and{" "}
               <a
-                href="https://intracom.com/privacy-policy/"
+                href={`${app_url}/privacy-policy/`}
                 className="text-blue-600 underline"
               >
                 Privacy Policy
               </a>
-              . If you do not agree, you cannot use Mattermost.
+              . If you do not agree, you cannot use Intracom.
             </p>
           </div>
         </div>
