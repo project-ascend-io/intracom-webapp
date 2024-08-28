@@ -1,90 +1,33 @@
 "use client";
+const app_url = process.env.APP_URL as string;
 const api_url = process.env.NEXT_PUBLIC_API_URL as string;
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { AdminSignUpForm, AdminSignupFormSchema } from "./types";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const SignupUserComplete: React.FC = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [password, setPassword] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [error, setError] = useState<string>(""); // Explicitly type 'error' as a string
-  const [emailError, setEmailError] = useState<string>("");
-  const [usernameError, setUsernameError] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<string>("");
-  const [organization, setOrganization] = useState<string>("");
-  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+   } = useForm<AdminSignUpForm>({ resolver: zodResolver(AdminSignupFormSchema) });
+   const [showPassword, setShowPassword] = useState<boolean>(false);
+   const userName = watch('userName');
+   const password = watch('password');
 
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-  const handleUserNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value);
-  };
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const validateEmail = (email: string) => {
-    const regex =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regex.test(email);
-  };
-
-  const validateUsername = (username: string) => {
-    const minLength = 3;
-    const maxLength = 30;
-    const regex = /^[a-zA-Z0-9_]+$/;
-    return (
-      regex.test(username) &&
-      username.length >= minLength &&
-      username.length <= maxLength
-    );
-  };
-
-  const validatePassword = (password: string) => {
-    const minLength = 8;
-    const maxLength = 64;
-    const regex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return (
-      regex.test(password) &&
-      password.length >= minLength &&
-      password.length <= maxLength
-    );
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setEmailError("");
-    setUsernameError("");
-    setPasswordError("");
-
-    let isValid = true;
-    if (!validateEmail(email)) {
-      setEmailError("Invalid email format.");
-      isValid = false;
-    }
-    if (!validateUsername(userName)) {
-      setUsernameError("Username must be 3-15 characters long.");
-      isValid = false;
-    }
-    if (!validatePassword(password)) {
-      setPasswordError("Password must be 8-64 characters long.");
-      isValid = false;
-    }
-
-    if (!isValid) {
-      return;
-    }
-
+  const onSubmit: SubmitHandler<AdminSignUpForm> = async ({email, userName, password, organization, instanceUrl}: AdminSignUpForm) => {
+    
     try {
       const response = await fetch(`${api_url}/users`, {
         method: "POST",
@@ -96,6 +39,7 @@ const SignupUserComplete: React.FC = () => {
           username: userName,
           password,
           organization,
+          instanceUrl
         }),
       });
 
@@ -120,6 +64,7 @@ const SignupUserComplete: React.FC = () => {
       // setError(error.message);
     }
   };
+
 
   return (
     <div className="flex flex-row items-center justify-center min-h-screen bg-gray-50">
@@ -152,7 +97,7 @@ const SignupUserComplete: React.FC = () => {
           </div>
 
           <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <h1 className="text-2xl font-bold py-4">Create your account</h1>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
@@ -161,44 +106,41 @@ const SignupUserComplete: React.FC = () => {
                 <input
                   type="email"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  required
-                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                  value={email}
-                  onChange={handleEmailChange}
+                  {...register("email")}
                 />
-                {emailError && (
-                  <p className="text-red-500 text-xs italic">{emailError}</p>
+                {errors.email && (
+                  <p className="text-red-500 text-xs italic">{errors.email.message}</p>
                 )}
               </div>
               <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                  Username
+                </label>
                 <input
                   type="text"
                   placeholder="Choose a Username"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  required
-                  pattern="^[a-z0-9_-]{3,15}$"
-                  value={userName}
-                  onChange={handleUserNameChange}
+                  {...register("userName")}
                 />
-                {userName && (
+                {!errors.userName && userName && (
                   <label className="text-xs text-gray-400 mb-4">
                     You can use lowercase numbers, letters, periods, dashes, and
                     underscores.
                   </label>
                 )}
-                {usernameError && (
-                  <p className="text-red-500 text-xs italic">{usernameError}</p>
+                {errors.userName && (
+                  <p className="text-red-500 text-xs italic">{errors.userName.message}</p>
                 )}
               </div>
               <div className="mb-4 relative">
+              <label className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Choose a Password"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  required
-                  pattern=".{8,64}"
-                  value={password}
-                  onChange={handlePasswordChange}
+                  {...register("password")}
                 />
                 <button
                   type="button"
@@ -207,39 +149,42 @@ const SignupUserComplete: React.FC = () => {
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
-                {password && (
+                {!errors.password && password && (
                   <label className="text-xs text-gray-400 mb-4">
                     Must be 8-64 characters long.
                   </label>
                 )}
-                {passwordError && (
-                  <p className="text-red-500 text-xs italic">{passwordError}</p>
+                {errors.password && (
+                  <p className="text-red-500 text-xs italic">{errors.password.message}</p>
                 )}
               </div>
+              <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
                 What’s the name of your organization?
               </label>
               <input
                 type="text"
                 placeholder="Research Corp"
-                className="border border-gray-300 rounded-md p-2 w-full mb-4"
-                value={organization}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setOrganization(e.target.value)
-                }
+                className="border border-gray-300 rounded-md p-2 w-full"
+                {...register("organization")}
               />
-
-              <p className="mt-4 text-sm  text-gray-600">
-                Interested in receiving Intracom security, product, promotions,
-                and company updates via newsletter? Sign up at{" "}
-                <a
-                  href="https://intracom.com/security-updates/"
-                  className="text-blue-600 underline"
-                >
-                  https://intracom.com/security-updates/
-                </a>
-                .
-              </p>
+                {errors.organization && (
+                  <p className="text-red-500 text-xs italic">{errors.organization.message}</p>
+                )}
+              </div>
+                <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Instance Url
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  {...register("instanceUrl")}
+                />
+                {errors.instanceUrl && (
+                  <p className="text-red-500 text-xs italic">{errors.instanceUrl.message}</p>
+                )}
+              </div>
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white my-4 py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
@@ -251,19 +196,19 @@ const SignupUserComplete: React.FC = () => {
               By proceeding to create your account and use Intracom, you agree
               to our{" "}
               <a
-                href="https://intracom.com/terms-of-use/"
+                href={`${app_url}/terms-of-use/`}
                 className="text-blue-600 underline"
               >
                 Terms of Use
               </a>{" "}
               and{" "}
               <a
-                href="https://intracom.com/privacy-policy/"
+                href={`${app_url}/privacy-policy/`}
                 className="text-blue-600 underline"
               >
                 Privacy Policy
               </a>
-              . If you do not agree, you cannot use Mattermost.
+              . If you do not agree, you cannot use Intracom.
             </p>
           </div>
         </div>
