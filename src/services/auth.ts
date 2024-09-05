@@ -1,12 +1,13 @@
 import { LoginFormType } from "@/types/login";
 import { fetchFromAPI } from "@/utils/fetch";
+import { ResponseObject } from "@/types/http";
 
 /**
  * Login user
  * @param {object} formData - an object containing the user email and password
  * @returns {object} - response data or error object returned from the server
  */
-export async function login(formData: LoginFormType) {
+export async function login(formData: LoginFormType): Promise<ResponseObject> {
   const fetchParams = {
     method: "POST",
     endpoint: "/auth/login",
@@ -26,7 +27,7 @@ export async function login(formData: LoginFormType) {
  * Check user session
  * @returns {object} - response data or error object returned from the server
  */
-export async function checkSession() {
+export async function checkSession(): Promise<ResponseObject> {
   const fetchParams = {
     method: "GET",
     endpoint: "/auth/check",
@@ -46,7 +47,7 @@ export async function checkSession() {
  * Logout user
  * @returns {ResponseObject} The response from the server
  */
-export async function logout() {
+export async function logout(): Promise<ResponseObject> {
   const fetchParams = {
     method: "POST",
     endpoint: "/auth/logout",
