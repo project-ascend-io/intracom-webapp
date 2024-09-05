@@ -1,4 +1,4 @@
-import { FetchParametersType } from "@/types/http";
+import { FetchParametersType, ResponseObject } from "@/types/http";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -10,7 +10,9 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
  * @param {object} body - object containing properties to be passed to API
  * @returns {ResponseObject} The response from the server
  */
-export async function fetchFromAPI(params: FetchParametersType) {
+export async function fetchFromAPI(
+  params: FetchParametersType
+): Promise<ResponseObject> {
   try {
     const response = await fetch(`${BASE_URL}${params.endpoint}`, {
       headers: { "Content-Type": "application/json" },
