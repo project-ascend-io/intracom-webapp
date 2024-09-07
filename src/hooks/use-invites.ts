@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
-import { ApiResponseWrapper, Invitation, UserInviteParams } from "@/app/(public)/user-invites/[hash]/types";
+import { useEffect, useState } from 'react';
+import {
+  ApiResponseWrapper,
+  Invitation,
+  UserInviteParams,
+} from '@/app/(public)/user-invites/[hash]/types';
 const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 export const useInvite = ({ hash }: UserInviteParams) => {
@@ -11,7 +15,7 @@ export const useInvite = ({ hash }: UserInviteParams) => {
     const fetchInvite = async () => {
       try {
         const response = await fetch(API_URL + '/user-invites/' + hash, {
-            cache: 'no-store'
+          cache: 'no-store',
         });
 
         if (!response.ok) {
@@ -31,7 +35,7 @@ export const useInvite = ({ hash }: UserInviteParams) => {
       }
     };
     fetchInvite();
-  }, []);
+  }, [hash]);
 
   return { invite, isLoading, error, setInvite, setIsLoading };
 };
