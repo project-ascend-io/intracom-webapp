@@ -5,7 +5,7 @@ export default function DownloadPage() {
         <div className='grid grid-cols-1 gap-6 py-6 lg:grid-cols-5'>
           <div className='lg:col-span-4'>
             <h1 className='text-xl font-bold'>
-              Congratulation, you&apos;re account is all setup!
+              Congratulation, your account is all setup!
             </h1>
             <p>To get started, download the desktop app.</p>
 
