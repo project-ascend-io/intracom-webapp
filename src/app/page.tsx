@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState } from 'react';
 
 const HomePage = () => {
@@ -22,23 +22,7 @@ const HomePage = () => {
             nonprofits, and small companies.
           </p>
 
-          <div className='mt-8'>
-            <input
-              type='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder='Please enter your email address'
-              className='rounded-l-md border-none p-3 text-black outline-none'
-            />
-            <button
-              onClick={handleNotify}
-              className='rounded-r-md bg-white p-3 text-black'
-            >
-              Notify Me
-            </button>
-          </div>
-
-          <p className='mt-4 italic'>Notify me when App is launched</p>
+          
         </div>
       </div>
     </div>
