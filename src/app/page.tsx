@@ -13,7 +13,7 @@ const HomePage = () => {
     <div className='flex h-screen items-center justify-center bg-black text-white'>
       <div className='text-center'>
         <div className=''>
-          <h1 className='bg-gradient-to-r from-green-400 via-purple-500 to-pink-500 bg-clip-text text-6xl font-bold text-transparent'>
+          <h1 className='bg-gradient-to-r from-green-400 via-purple-500 to-pink-500 bg-clip-text text-6xl font-bold text-transparent py-2'>
             Coming Soon
           </h1>
           <p className='mx-auto p-5 text-center text-lg lg:w-[70%]'>
