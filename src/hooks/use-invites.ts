@@ -30,7 +30,7 @@ export const useInvite = ({ hash }: UserInviteParams) => {
         setInvite(userInvitation);
         setIsLoading(false);
       } catch (err) {
-        setError(err);
+        setError(err as ApiResponseWrapper);
         setIsLoading(false);
       }
     };
