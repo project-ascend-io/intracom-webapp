@@ -16,7 +16,7 @@ export default function DownloadPage() {
               </div>
               <div>
                 <button className='btn btn-primary rounded-xl p-3 text-white'>
-                  Download
+                  <a href="/intracom-mac.zip" download>Download</a>
                 </button>
               </div>
             </div>
@@ -27,7 +27,7 @@ export default function DownloadPage() {
               </div>
               <div>
                 <button className='btn btn-primary rounded-xl p-3 text-white'>
-                  Download
+                  <a href="/intracom-windows.exe" download>Download</a>
                 </button>
               </div>
             </div>

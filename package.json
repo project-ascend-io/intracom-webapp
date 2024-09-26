@@ -10,7 +10,7 @@
     "lint:fix": "eslint --fix --ext .ts,.tsx src/",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
-    "ctzn": "cz",
+    "commit": "cz",
     "test": "jest"
   },
   "config": {
