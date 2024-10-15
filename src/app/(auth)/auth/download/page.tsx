@@ -2,13 +2,9 @@
 import React from 'react';
 export default function DownloadPage() {
   const handleOpenApp = () => {
-    // If the app is not installed, trigger alert to download the app saying "Please download the app first"
-
+ 
     // Attempt to open the Electron app via a custom protocol
-
     const filePath = 'path/to/your/intracom-electron/out/intracom-06-2024.app'; // Update this path
-    
-
     window.location.href = `intracom://${filePath}`;
   };
   return (
