@@ -1,4 +1,12 @@
+'use client';
+import React from 'react';
 export default function DownloadPage() {
+  const handleOpenApp = () => {
+ 
+    // Attempt to open the Electron app via a custom protocol
+    const filePath = 'path/to/your/intracom-electron/out/intracom-06-2024.app'; // Update this path
+    window.location.href = `intracom://${filePath}`;
+  };
   return (
     <>
       <div className='container mx-auto md:w-9/12'>
@@ -16,7 +24,9 @@ export default function DownloadPage() {
               </div>
               <div>
                 <button className='btn btn-primary rounded-xl p-3 text-white'>
-                  <a href="/intracom-mac.zip" download>Download</a>
+                  <a href='/intracom-mac.zip' download>
+                    Download
+                  </a>
                 </button>
               </div>
             </div>
@@ -27,7 +37,9 @@ export default function DownloadPage() {
               </div>
               <div>
                 <button className='btn btn-primary rounded-xl p-3 text-white'>
-                  <a href="/intracom-windows.exe" download>Download</a>
+                  <a href='/intracom-windows.exe' download>
+                    Download
+                  </a>
                 </button>
               </div>
             </div>
@@ -35,7 +47,10 @@ export default function DownloadPage() {
             <p className='textarea-secondary mb-3 mt-6'>
               Already have the app?
             </p>
-            <button className='btn btn-neutral w-72 rounded-xl p-3 text-white'>
+            <button
+              className='btn btn-neutral w-72 rounded-xl p-3 text-white'
+              onClick={handleOpenApp}
+            >
               Open Intracom
             </button>
           </div>
