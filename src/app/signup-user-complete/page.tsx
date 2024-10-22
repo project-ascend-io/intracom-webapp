@@ -62,7 +62,7 @@ const SignupUserComplete: React.FC = () => {
         const contentType = response.headers.get('content-type');
         if (contentType && contentType.indexOf('application/json') !== -1) {
           console.log('Success:', await response.json());
-          router.push('successful');
+          router.push('/auth/download'); // Adjust the path as needed
         } else {
           console.log('Received non-JSON response');
           const textResponse = await response.text();
