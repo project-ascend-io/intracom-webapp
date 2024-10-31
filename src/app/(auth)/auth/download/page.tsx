@@ -1,11 +1,33 @@
 'use client';
 import React from 'react';
 export default function DownloadPage() {
+  const getDefaultPath = (): string | undefined => {
+    const userAgent = navigator.userAgent;
+
+    if (userAgent.includes('Mac OS X')) {
+      return '/Applications/intracom.app';
+    } else if (userAgent.includes('Windows')) {
+      return 'C:\\Program Files\\intracom\\intracom.exe';
+    } else if (userAgent.includes('Linux')) {
+      return '/usr/local/bin/intracom';
+    } else {
+      return undefined;
+    }
+  };
+
   const handleOpenApp = () => {
- 
-    // Attempt to open the Electron app via a custom protocol
-    const filePath = 'path/to/your/intracom-electron/out/intracom-06-2024.app'; // Update this path
-    window.location.href = `intracom://${filePath}`;
+    const defaultPath = getDefaultPath();
+    if (!defaultPath) {
+      alert('Unsupported platform. Please download the app manually.');
+      return;
+    }
+    try {
+      window.location.href = `intracom://${defaultPath}`;
+    } catch (error) {
+      alert(
+        `Failed to open the app. The file at ${defaultPath} could not be found or opened.`
+      );
+    }
   };
   return (
     <>
