@@ -11,11 +11,6 @@ const SignUpSuccess = () => {
     router.push('/dashboard'); // Adjust the path as needed
   };
 
-  const redirectToDownload = () => {
-    // Redirect to the dashboard page
-    router.push('/auth/download'); // Adjust the path as needed
-  };
-
   return (
     <div className='mx-auto mt-10 flex h-[360px] w-[800px] flex-col items-center bg-gray-100'>
       <div className='px-10'>
@@ -40,7 +35,7 @@ const SignUpSuccess = () => {
           Proceed to Dashboard
         </button>
         <button
-          onClick={redirectToDownload}
+          // onClick='window.location.href = "https://play.google.com/store/apps/details?id=com.intracom.io";'
           className='mx-1 w-1/2 rounded-md bg-blue-400 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
         >
           Click here to download the app
