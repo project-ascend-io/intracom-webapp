@@ -37,10 +37,12 @@ const SignupUserComplete: React.FC = () => {
   }: AdminSignUpForm) => {
     try {
       const response = await fetch(`${api_url}/users`, {
+       
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+       
         body: JSON.stringify({
           email,
           username: userName,
@@ -49,6 +51,7 @@ const SignupUserComplete: React.FC = () => {
           instanceUrl,
         }),
       });
+      console.log(response);
 
       if (!response.ok) {
         console.error('Error:', response.status, response.statusText);
@@ -59,7 +62,7 @@ const SignupUserComplete: React.FC = () => {
         const contentType = response.headers.get('content-type');
         if (contentType && contentType.indexOf('application/json') !== -1) {
           console.log('Success:', await response.json());
-          router.push('successful');
+          router.push('/auth/download'); // Adjust the path as needed
         } else {
           console.log('Received non-JSON response');
           const textResponse = await response.text();
