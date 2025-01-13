@@ -14,7 +14,9 @@ const HomePage = () => {
       </PageContainer>
       <PageContainer className='mt-0'>
         <HeroSection />
+        <div className="divider divider-primary"><p className="text-primary uppercase">Features</p></div>
         <FeatureSection />
+        <div className="divider divider-primary"></div>
         <FooterSection />
       </PageContainer>
     </>

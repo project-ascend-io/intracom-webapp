@@ -7,11 +7,11 @@ type FeatureProps = {
 const FeatureCard = (props: FeatureProps) => {
   const { icon, title, description } = props;
   return (
-    <div className='text-center'>
-      <p>{icon}</p>
-      <p>{title}</p>
-      <p>{description}</p>
-    </div>
+    <div className="text-center p-8 prose">
+      <p className="text-xl my-0">{icon}</p>
+      <p className="font-semibold my-0">{title}</p>
+      <p className="my-0">{description}</p>
+    </div >
   );
 };
 
@@ -19,14 +19,14 @@ const FeatureSection = () => {
   const featureCards = [
     {
       icon: '🏠',
-      title: 'Projects',
-      description: 'Organize and collaborate on projects with ease.',
+      title: 'Intuative Navigation',
+      description: 'Use Intracom to navigate your workspace efficiently.',
     },
     {
       icon: '📱',
-      title: 'Mobile',
+      title: 'Channel Management',
       description:
-        'Use Intracom on your phone or tablet to stay connected with your team.',
+        'Create and manage channels, including direct messages, voice calls, and video calls.',
     },
     {
       icon: '💬',
@@ -34,7 +34,7 @@ const FeatureSection = () => {
       description: 'Send real-time messages and notifications to your team.',
     },
     {
-      icon: '�',
+      icon: '📁',
       title: 'File Sharing',
       description: 'Share files and documents with your team.',
     },
@@ -42,7 +42,7 @@ const FeatureSection = () => {
 
   return (
     <>
-      <div className='container m-auto flex justify-between border'>
+      <div className="container m-auto grid grid-cols-4 gap-4">
         {featureCards.map((card, index) => (
           <FeatureCard
             key={index}
@@ -51,7 +51,7 @@ const FeatureSection = () => {
             description={card.description}
           />
         ))}
-      </div>
+      </div >
     </>
   );
 };
