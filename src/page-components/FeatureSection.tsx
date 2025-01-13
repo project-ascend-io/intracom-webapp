@@ -19,30 +19,30 @@ const FeatureSection = () => {
   const featureCards = [
     {
       icon: '🏠',
-      title: 'Intuative Navigation',
-      description: 'Use Intracom to navigate your workspace efficiently.',
+      title: 'Real-Time Messaging with WebSockets',
+      description: 'Experience instant, reliable communication with WebSocket technology.',
     },
     {
       icon: '📱',
-      title: 'Channel Management',
+      title: 'Desktop Application',
       description:
-        'Create and manage channels, including direct messages, voice calls, and video calls.',
+        'Cross-platform application built with ElectronJS for seamless use on any device.',
     },
     {
       icon: '💬',
-      title: 'Messages',
-      description: 'Send real-time messages and notifications to your team.',
+      title: 'Effortless Navigation',
+      description: 'Naviage with ease using intuitive keybindings and a user-friendly interface.',
     },
     {
       icon: '📁',
-      title: 'File Sharing',
-      description: 'Share files and documents with your team.',
+      title: 'Powered by Modern Technologies',
+      description: 'Built with Typescript, Node.js, and more to ensure performance and scalability',
     },
   ];
 
   return (
     <>
-      <div className="container m-auto grid grid-cols-4 gap-4">
+      <div className="container m-auto grid grid-cols-4">
         {featureCards.map((card, index) => (
           <FeatureCard
             key={index}
