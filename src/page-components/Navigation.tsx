@@ -17,7 +17,7 @@ const Navigation = () => {
             <NavLink label='Home' hyperlink='/' />
             <NavLink label='About' hyperlink='/about' />
             <NavLink label='Community' hyperlink='/#community' />
-            <NavLink label='Contributors' hyperlink='/contact' />
+            <NavLink label='Contributors' hyperlink='/#contributors' />
             <NavLink label='Contact' hyperlink='/contact' />
             <li className='ml-4'>
               <button className='btn btn-outline rounded-md border-2 px-10 uppercase text-white'>

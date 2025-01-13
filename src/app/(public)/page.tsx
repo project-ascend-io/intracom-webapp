@@ -4,6 +4,7 @@ import Navigation from '@/page-components/Navigation';
 import HeroSection from '@/page-components/HeroSection';
 import FeatureSection from '@/page-components/FeatureSection';
 import CommunitySection from '@/page-components/CommunitySection';
+import ContributorSection from '@/page-components/ContributorSection';
 import FooterSection from '@/page-components/FooterSection';
 import PageContainer from '@/page-components/PageContainer';
 
@@ -19,6 +20,7 @@ const HomePage = () => {
         <FeatureSection />
         <div className="divider divider-primary mb-12"></div>
         <CommunitySection />
+        <ContributorSection />
         <FooterSection />
       </PageContainer >
     </>
