@@ -1,35 +1,38 @@
-import PageContainer from "@/page-components/PageContainer";
-import EmailInput from "@/components/EmailInput";
+import EmailInput from '@/components/EmailInput';
 
 const HeroSection = () => {
-  const emailInput = <EmailInput />;
   return (
     <>
-      <section className="hero bg-base-200 min-h-screen">
-        <div className="hero-content">
-          <div className="grid grid-cols-3 gap-4">
-            <div className="flex items-center">
-              <div>
-                <h2>Awesome, Clean, Powerful & Creative</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis consectetur, orci id fermentum viverra, nisi lectus commodo
+      <section className='hero min-h-screen bg-base-200 pb-[175px]'>
+        <div className='hero-content'>
+          <div className='grid grid-cols-2 gap-24'>
+            <div className='col-span-3 flex items-center'>
+              <div className="prose">
+                <h2>Building Connections,<br />Empowering Careers</h2>
+                <p className="text-[18px]">
+                  Intracom is the professional communication tool for teams,
+                  created by a global community of engineers.
                 </p>
-                <form>
-                  {emailInput}
+                <form className="grid grid-cols-4">
+                  <EmailInput classNames="col-span-2 mr-4" />
+                  <button className='btn btn-success rounded-md border-2 px-10 uppercase text-white w-max'>
+                    Join the waitlist
+                  </button>
                 </form>
+                <br />
+                <span>
+                  Are you an engineer? <a href='/organization'>Learn how to contribute</a>
+                </span>
               </div>
             </div>
-            <div>
-              <span className="w-[50px]"></span>
-            </div>
-            <div className="grid">
-              <img className="justify-self-end place-self-end" src="https://picsum.photos/seed/picsum/200/300" />
+            <div className='col-start-5'>
+              <img className="relative m-w-none" src="https://picsum.photos/seed/picsum/400/400" />
             </div>
           </div>
         </div>
-      </section>
+      </section >
     </>
-  )
-}
+  );
+};
 
 export default HeroSection;
