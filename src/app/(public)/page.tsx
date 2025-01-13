@@ -21,8 +21,10 @@ const HomePage = () => {
         <div className="divider divider-primary mb-12"></div>
         <CommunitySection />
         <ContributorSection />
-        <FooterSection />
       </PageContainer >
+      <PageContainer className="bg-primary-500 min-w-[100vw]">
+        <FooterSection />
+      </PageContainer>
     </>
   );
 };
