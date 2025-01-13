@@ -21,7 +21,7 @@ const HeroSection = () => {
                 </form>
                 <br />
                 <span>
-                  Are you an engineer? <a href='/organization'>Learn how to contribute</a>
+                  Are you an engineer? <a className="text-info font-semibold" href='/organization'>Learn how to contribute</a>
                 </span>
               </div>
             </div>

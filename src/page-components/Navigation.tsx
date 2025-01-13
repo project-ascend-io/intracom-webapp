@@ -16,7 +16,7 @@ const Navigation = () => {
           <ul className='menu menu-horizontal items-center px-1'>
             <NavLink label='Home' hyperlink='/' />
             <NavLink label='About' hyperlink='/about' />
-            <NavLink label='Community' hyperlink='/about' />
+            <NavLink label='Community' hyperlink='/#community' />
             <NavLink label='Contributors' hyperlink='/contact' />
             <NavLink label='Contact' hyperlink='/contact' />
             <li className='ml-4'>

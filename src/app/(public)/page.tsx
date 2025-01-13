@@ -3,6 +3,7 @@ import React from 'react';
 import Navigation from '@/page-components/Navigation';
 import HeroSection from '@/page-components/HeroSection';
 import FeatureSection from '@/page-components/FeatureSection';
+import CommunitySection from '@/page-components/CommunitySection';
 import FooterSection from '@/page-components/FooterSection';
 import PageContainer from '@/page-components/PageContainer';
 
@@ -14,11 +15,12 @@ const HomePage = () => {
       </PageContainer>
       <PageContainer className='mt-0'>
         <HeroSection />
-        <div className="divider divider-primary"><p className="text-primary uppercase">Features</p></div>
+        <div className="divider divider-primary mt-4"><p className="text-primary uppercase">Features</p></div>
         <FeatureSection />
-        <div className="divider divider-primary"></div>
+        <div className="divider divider-primary mb-12"></div>
+        <CommunitySection />
         <FooterSection />
-      </PageContainer>
+      </PageContainer >
     </>
   );
 };
