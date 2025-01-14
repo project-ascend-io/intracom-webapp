@@ -1,5 +1,19 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 import white_logo from '../assets/white-logo.png';
+
+type FooterLabelProps = {
+  children: string;
+  className?: string;
+};
+
+const FooterLabel = ({ children, className }: FooterLabelProps) => {
+  return (
+    <>
+      <p className={clsx('footer-title text-white', className)}>{children}</p>
+    </>
+  )
+}
 
 const FooterSection = () => {
   return (
@@ -10,7 +24,7 @@ const FooterSection = () => {
           <p className="text-white">&copy; Intracom {new Date().getFullYear()}.</p>
         </aside>
         <nav className="text-white">
-          <h6 className='footer-title'>Documentation</h6>
+          <FooterLabel>Documentation</FooterLabel>
           <a href="https://github.com/project-ascend-io/intracom-electron"
             target='_blank'
             className='link-hover link'>Github</a>
@@ -23,14 +37,14 @@ const FooterSection = () => {
             className='link-hover link'>Product Requirement Document</a>
         </nav >
         <nav className="text-white">
-          <h6 className='footer-title'>Intracom</h6>
+          <FooterLabel>Project</FooterLabel>
           <a href="/" className='link-hover link'>About</a>
           <a href="/#community" className='link-hover link'>Community</a>
           <a href="/#contributors" className='link-hover link'>Contributors</a>
           <a className='link-hover link'>Press kit</a>
         </nav>
         <nav className="text-white">
-          <h6 className='footer-title'>Legal</h6>
+          <FooterLabel>Legal</FooterLabel>
           <a className='link-hover link' href='/terms-of-use'>
             Terms of use
           </a>

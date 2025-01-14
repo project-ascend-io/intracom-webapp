@@ -18,27 +18,27 @@ const config: Config = {
         DEFAULT: {
           css: {
             h1: {
-              fontSize: '3rem',
+              fontSize: '3.815rem',
               fontWeight: 'bold',
             },
             h2: {
-              fontSize: '2.5rem',
+              fontSize: '3.052rem',
               fontWeight: 'bold',
             },
             h3: {
-              fontSize: '2rem',
+              fontSize: '2.441rem',
               fontWeight: 'bold',
             },
             h4: {
-              fontSize: '1.5rem',
+              fontSize: '1.953rem',
               fontWeight: 'bold',
             },
             h5: {
-              fontSize: '1.25rem',
+              fontSize: '1.563rem',
               fontWeight: 'bold',
             },
             h6: {
-              fontSize: '1rem',
+              fontSize: '1.25rem',
               fontWeight: 'bold',
             },
             a: {
@@ -100,26 +100,15 @@ const config: Config = {
         "danger-900": "#7A0E33"
       },
       fontSize: {
-        h1: "3rem", // Heading 1
-        h2: "2.5rem", // Heading 2
-        h3: "2rem", // Heading 3
-        h4: "1.75rem", // Heading 4
-        h5: "1.5rem", // Heading 5
-        h6: "1.25rem", // Heading 6
         xs: "0.75rem",
         sm: "0.875rem",
         base: "1rem",
-        lg: "1.125rem",
-        xl: "1.25rem",
-        "2xl": "1.5rem",
-        "3xl": "1.875rem",
-        "4xl": "2.25rem",
-        "5xl": "3rem",
-        "6xl": "3.75rem",
-        "7xl": "4.5rem",
-        // Add your custom sizes
-        "custom-small": "0.625rem",
-        "custom-large": "2.75rem",
+        lg: "1.2rem",
+        xl: "1.44rem",
+        "2xl": "1.728rem",
+        "3xl": "2.074rem",
+        "4xl": "2.488rem",
+        "5xl": "2.986rem",
       }
     },
   },

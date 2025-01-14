@@ -33,9 +33,9 @@ const ContributorSection = () => {
     <>
       <div id="contributors" className="min-h-screen flex items-center flex-col">
         <div className="text-center m-auto">
-          <div className="prose m-auto">
-            <h2 className="font-bold mb-4">Discover Talented Engineers</h2>
-            <p>
+          <div className="m-auto">
+            <h3 className="mb-4">Discover Talented Engineers</h3>
+            <p className="w-[75%] m-auto">
               Intracom is not just a product—it's a showcase of talent. Explore contributions from skilled engineers and connect with individuals driving real-world solutions.
             </p>
           </div>

@@ -2,8 +2,8 @@ const CommunitySection = () => {
   return (
     <>
       <div id="community" className="flex items-center justify-between min-h-screen">
-        <div className="prose grow">
-          <h2 className="text-4xl font-bold">Join a Global Community of Innovators</h2>
+        <div className="grow">
+          <h3>Join a Global Community of Innovators</h3>
           <p>
             Intracom is more than a tool—it’s a movement. Engineers from around the world collaborate to create a solution that simplifies team communication while empowering individual growth.
           </p>

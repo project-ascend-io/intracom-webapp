@@ -7,9 +7,9 @@ const HeroSection = () => {
         <div className='hero-content'>
           <div className='grid grid-cols-2 gap-24'>
             <div className='col-span-3 flex items-center'>
-              <div className="prose">
+              <div>
                 <h2>Building Connections,<br />Empowering Careers</h2>
-                <p className="text-[18px]">
+                <p>
                   Intracom is the professional communication tool for teams,
                   created by a global community of engineers.
                 </p>

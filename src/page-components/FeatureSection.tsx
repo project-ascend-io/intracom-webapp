@@ -7,7 +7,7 @@ type FeatureProps = {
 const FeatureCard = (props: FeatureProps) => {
   const { icon, title, description } = props;
   return (
-    <div className="text-center p-8 prose">
+    <div className="text-center p-8">
       <p className="text-xl my-0">{icon}</p>
       <p className="font-semibold my-0">{title}</p>
       <p className="my-0">{description}</p>

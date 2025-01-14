@@ -1,6 +1,30 @@
+/**
+ * This injects Tailwind's base styles and any base styles registered by
+ * plugins.
+ */
 @tailwind base;
+
+/**
+ * This injects Tailwind's component classes and any component classes
+ * registered by plugins.
+ */
 @tailwind components;
+
+/**
+ * This injects Tailwind's utility classes and any utility classes registered
+ * by plugins.
+ */
 @tailwind utilities;
+
+/**
+ * Use this directive to control where Tailwind injects the hover, focus,
+ * responsive, dark mode, and other variants of each class.
+ *
+ * If omitted, Tailwind will append these classes to the very end of
+ * your stylesheet by default.
+ */
+@tailwind variants;
+
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -16,15 +40,65 @@
   }
 }
 
-/* body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
+@layer base {
+  h1 {
+    font-size: 2.986rem;
+    @apply font-bold;
+  }
+
+  h2 {
+    font-size: 2.488rem;
+    @apply font-bold;
+  }
+
+  h3 {
+    font-size: 2.074rem;
+    @apply font-bold;
+  }
+
+  h4 {
+    font-size: 1.728rem;
+    @apply font-bold;
+  }
+
+  h5 {
+    font-size: 1.44rem;
+    @apply font-semibold;
+  }
+
+  h6 {
+    font-size: 1.2rem;
+    @apply font-semibold;
+  }
+
+  p {
+    @apply text-base;
+    margin-bottom: 10px;
+  }
+
+  small {
+    @apply text-sm;
+  }
+
+  ol {
+    display: block;
+    list-style-type: decimal;
+    /* Uses numbers (1, 2, 3, ...) */
+    margin-block-start: 1em;
+    /* Margin before the <ol> */
+    margin-block-end: 1em;
+    /* Margin after the <ol> */
+    margin-inline-start: 0px;
+    /* No left/right margin by default */
+    margin-inline-end: 0px;
+    /* No left/right margin by default */
+    padding-inline-start: 40px;
+    /* Indentation for list items */
+  }
+
+
+  ol li {}
+}
 
 @layer utilities {
   .text-balance {

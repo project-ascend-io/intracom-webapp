@@ -1,7 +1,7 @@
 const CtaSection = () => {
   return (
     <>
-      <div className="container prose m-auto text-center text-white py-20">
+      <div className="container m-auto text-center text-white py-20">
         <h3>Shape the Future of Communication</h3>
         <p>
           Whether you're an engineer looking to make an impact or searching for top engineering talent, Intracom provides the tools to connect, build, and grow.
