@@ -7,6 +7,7 @@ import CommunitySection from '@/page-components/CommunitySection';
 import ContributorSection from '@/page-components/ContributorSection';
 import FooterSection from '@/page-components/FooterSection';
 import PageContainer from '@/page-components/PageContainer';
+import CtaSection from '@/page-components/CtaSection';
 
 const HomePage = () => {
   return (
@@ -21,6 +22,9 @@ const HomePage = () => {
         <div className="divider divider-primary mb-12"></div>
         <CommunitySection />
         <ContributorSection />
+      </PageContainer>
+      <PageContainer className="bg-primary-900 min-w-[100vw]">
+        <CtaSection />
       </PageContainer >
       <PageContainer className="bg-primary-500 min-w-[100vw]">
         <FooterSection />
