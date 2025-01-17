@@ -1,33 +1,39 @@
-
-import GithubAvatar from "@/components/GithubAvatar";
+import GithubAvatar, { GithubAvatarProps } from "@/components/GithubAvatar";
+import { fetchAllContributors, fetchNextJsContributors, fetchElectronJsContributors, fetchExpressJsContributors } from "@/app/actions";
+import { useEffect, useState } from "react";
+import { GithubContributor } from "@/app/actions";
 
 const ContributorSection = () => {
-  const contributors: GithubAvatarProps[] = [
-    {
-      name: 'John Doe',
-      username: 'john_doe',
-      github_url: 'https://github.com/john_doe',
-      avatar_url: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
-      bio: 'Engineer at XYZ Corp',
-      living_portfolio: 'https://example.com/john_doe_portfolio'
-    },
-    {
-      name: 'Jane Smith',
-      username: 'jane_smith',
-      github_url: 'https://github.com/jane_smith',
-      avatar_url: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
-      bio: 'Software Engineer at ABC Corp',
-      living_portfolio: 'https://example.com/jane_smith_portfolio'
-    },
-    {
-      name: 'Michael Johnson',
-      username: 'michael_johnson',
-      github_url: 'https://github.com/michael_johnson',
-      avatar_url: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
-      bio: 'Product Manager at DEF Corp',
-      living_portfolio: 'https://example.com/michael_johnson_portfolio'
-    }
-  ]
+  const [contributors, setContributors] = useState<GithubAvatarProps[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAllContributors()
+      .then((contributors: GithubContributor[]) => {
+
+        console.log('Fetched contributors:', contributors);
+
+        const githubContributors: GithubAvatarProps[] = []
+        contributors.forEach((contributor: GithubContributor) => {
+          githubContributors.push({
+            name: contributor.login,
+            username: contributor.login,
+            github_url: contributor.html_url,
+            avatar_url: contributor.avatar_url,
+          })
+        })
+        setContributors(githubContributors);
+        setIsLoading(false);
+
+
+
+      })
+      .catch((error) => console.error('Error fetching contributors:', error));
+  }, []);
+
+  if (isLoading) {
+    return false;
+  }
 
   return (
     <>
@@ -36,7 +42,7 @@ const ContributorSection = () => {
           <div className="m-auto">
             <h3 className="mb-4">Discover Talented Engineers</h3>
             <p className="w-[75%] m-auto">
-              Intracom is not just a product—it's a showcase of talent. Explore contributions from skilled engineers and connect with individuals driving real-world solutions.
+              Intracom isn’t just a tool—it’s a showcase of engineering talent. Recruiters and hiring managers can explore contributions from skilled engineers, each tied to their GitHub profiles, providing clear evidence of their expertise.
             </p>
           </div>
           <div className="m-auto text-center my-12">
@@ -45,8 +51,6 @@ const ContributorSection = () => {
                 name={contributor.name}
                 username={contributor.username}
                 github_url={contributor.github_url}
-                bio={contributor.bio}
-                living_portfolio={contributor.living_portfolio}
                 avatar_url={contributor.avatar_url} key={index} />
             ))}
           </div>

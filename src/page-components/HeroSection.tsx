@@ -10,20 +10,14 @@ const HeroSection = () => {
           <div className='grid grid-cols-2 gap-24'>
             <div className='col-span-3 flex items-center'>
               <div>
-                <h2>Building Connections,<br />Empowering Careers</h2>
+                <h2>Contribute. Showcase. Get Recognized.</h2>
                 <p>
-                  Intracom is the professional communication tool for teams,
-                  created by a global community of engineers.
+                  Intracom is an open-source communication tool developed by engineers, for engineers. Collaborate on real-world projects, showcase your contributions, and get noticed by recruitersy a global community of engineers.
                 </p>
-                <form className="grid grid-cols-4">
-                  <EmailInput classNames="col-span-2 mr-4" />
-                  <button className='btn btn-success rounded-md border-2 px-10 uppercase text-white w-max'>
-                    Join the waitlist
-                  </button>
-                </form>
+                <button className="btn btn-info text-white rounded-md px-10 mb-2 mt-4">Contribute Now</button>
                 <br />
                 <span>
-                  Are you an engineer? <a className="text-info font-semibold" href='/organization'>Learn how to contribute</a>
+                  Are you looking for talent? <a className="text-primay-900 font-bold ml-2" href='/#contributors'>See Contributors</a>
                 </span>
               </div>
             </div>
