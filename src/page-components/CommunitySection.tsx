@@ -1,3 +1,6 @@
+import Image from 'next/image';
+import community_image from "@/assets/dalle-global-community.webp"
+
 const CommunitySection = () => {
   return (
     <>
@@ -14,7 +17,7 @@ const CommunitySection = () => {
           </div>
         </div>
         <div>
-          <img src="https://picsum.photos/seed/picsum/400/400" alt="illustration" width={400} height={300} />
+          <Image className="rounded-xl" src={community_image} alt="community" />
         </div>
       </div>
     </>

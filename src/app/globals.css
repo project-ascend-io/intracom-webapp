@@ -42,32 +42,50 @@
 
 @layer base {
   h1 {
+    display: block;
     font-size: 2.986rem;
+    margin-block-start: 0.98rem;
+    margin-block-end: 0.98rem;
     @apply font-bold;
   }
 
   h2 {
+    display: block;
     font-size: 2.488rem;
+    margin-block-start: 1.36rem;
+    margin-block-end: 1.36rem;
     @apply font-bold;
   }
 
   h3 {
+    display: block;
     font-size: 2.074rem;
+    margin-block-start: 1.76rem;
+    margin-block-end: 1.76rem;
     @apply font-bold;
   }
 
   h4 {
+    display: block;
     font-size: 1.728rem;
+    margin-block-start: 2.39rem;
+    margin-block-end: 2.36rem;
     @apply font-bold;
   }
 
   h5 {
+    display: block;
     font-size: 1.44rem;
+    margin-block-start: 2.88rem;
+    margin-block-end: 2.88rem;
     @apply font-semibold;
   }
 
   h6 {
+    display: block;
     font-size: 1.2rem;
+    margin-block-start: 3.6rem;
+    margin-block-end: 3.6rem;
     @apply font-semibold;
   }
 
@@ -83,25 +101,26 @@
   ol {
     display: block;
     list-style-type: decimal;
-    /* Uses numbers (1, 2, 3, ...) */
     margin-block-start: 1em;
-    /* Margin before the <ol> */
     margin-block-end: 1em;
-    /* Margin after the <ol> */
     margin-inline-start: 0px;
-    /* No left/right margin by default */
     margin-inline-end: 0px;
-    /* No left/right margin by default */
     padding-inline-start: 40px;
-    /* Indentation for list items */
   }
 
 
-  ol li {}
+  li {
+    display: list-item;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .primary-filter {
+    /* @ignore */
+    filter: brightness(0) saturate(100%) invert(98%) sepia(93%) saturate(1255%) hue - rotate(171deg) brightness(74%) contrast(85%)
   }
 }

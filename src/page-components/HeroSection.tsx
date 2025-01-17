@@ -1,9 +1,11 @@
 import EmailInput from '@/components/EmailInput';
+import Image from "next/image"
+import reaction_image from '@/assets/intracom-reaction.png'
 
 const HeroSection = () => {
   return (
     <>
-      <section className='hero min-h-screen bg-base-200 pb-[175px]'>
+      <section className='container m-auto hero min-h-screen bg-base-200 pb-[175px] '>
         <div className='hero-content'>
           <div className='grid grid-cols-2 gap-24'>
             <div className='col-span-3 flex items-center'>
@@ -26,7 +28,7 @@ const HeroSection = () => {
               </div>
             </div>
             <div className='col-start-5'>
-              <img className="relative m-w-none" src="https://picsum.photos/seed/picsum/400/400" />
+              <Image className="rounded-md shadow-lg border-[.5px] max-w-xl" src={reaction_image} alt="intracom app" />
             </div>
           </div>
         </div>
