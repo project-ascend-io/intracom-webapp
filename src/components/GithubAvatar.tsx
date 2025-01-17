@@ -20,7 +20,7 @@ const GithubAvatar = ({
         data-tip={toolTip}
       >
         <div className='w-20 rounded-full'>
-          <Image src={avatar_url} alt={name} />
+          <Image src={avatar_url} alt={name} width='50' height='50' />
         </div>
       </div>
     </a>
