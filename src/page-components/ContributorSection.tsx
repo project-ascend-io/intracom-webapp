@@ -1,7 +1,8 @@
 import GithubAvatar, { GithubAvatarProps } from "@/components/GithubAvatar";
-import { fetchAllContributors, fetchNextJsContributors, fetchElectronJsContributors, fetchExpressJsContributors } from "@/app/actions";
+import { fetchAllContributors } from "@/app/actions";
 import { useEffect, useState } from "react";
 import { GithubContributor } from "@/app/actions";
+import { openContributeModal } from "@/components/ContributeModal";
 
 const ContributorSection = () => {
   const [contributors, setContributors] = useState<GithubAvatarProps[]>([]);
@@ -49,7 +50,7 @@ const ContributorSection = () => {
             ))}
           </div>
           <p className="font-sm">
-            Are you an engineer? <a className="text-info" href='/organization'>Learn how to contribute</a>
+            Are you an engineer? <a className="text-info" onClick={openContributeModal}>Learn how to contribute</a>
           </p>
         </div>
       </div>

@@ -118,9 +118,4 @@
   .text-balance {
     text-wrap: balance;
   }
-
-  .primary-filter {
-    /* @ignore */
-    filter: brightness(0) saturate(100%) invert(98%) sepia(93%) saturate(1255%) hue - rotate(171deg) brightness(74%) contrast(85%)
-  }
 }

@@ -1,3 +1,6 @@
+'use client'
+import { openContributeModal } from "@/components/ContributeModal"
+
 const CtaSection = () => {
   return (
     <>
@@ -6,7 +9,11 @@ const CtaSection = () => {
         <p className="w-[80%] m-auto">
           Whether you’re an engineer eager to showcase your skills or a recruiter searching for proven talent, Intracom is the platform where contributions drive connections and careers.
         </p>
-        <button className="btn btn-success rounded-md border-2 px-10 uppercase my-6 text-primary-900">Contribute Now</button>
+        <button
+          onClick={openContributeModal}
+          className="btn btn-success rounded-md border-2 px-10 uppercase my-6 text-primary-900">
+          Contribute Now
+        </button>
         <span>
           <p>Are you looking for talent? <a href="/#contributors" className="ml-2 font-bold text-success">See Contributors</a></p>
         </span>

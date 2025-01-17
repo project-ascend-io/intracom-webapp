@@ -65,7 +65,6 @@ export async function fetchExpressJsContributors(): Promise<GithubContributor[]>
 export async function fetchDesignerContributors(): Promise<GithubContributor[]> {
 	return new Promise((resolve) => {
 		resolve([{
-
 			login: 'kaitlynmatousek',
 			id: 111,
 			node_id: '',

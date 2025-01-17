@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import community_image from "@/assets/dalle-global-community.webp"
+import { openContributeModal } from '@/components/ContributeModal';
 
 const CommunitySection = () => {
   return (
@@ -11,7 +12,7 @@ const CommunitySection = () => {
             Intracom is powered by engineers aim to collaboration, innovation, and building careers. Every contribution not only shapes the future of team communication but also showcases the talent and expertise of its creators.
           </p>
           <div className="w-full text-center">
-            <button className="btn btn-info mt-4 rounded-md border-2 px-10 uppercase text-white w-max">
+            <button onClick={openContributeModal} className="btn btn-info mt-4 rounded-md border-2 px-10 uppercase text-white w-max">
               Contribute Now
             </button>
           </div>

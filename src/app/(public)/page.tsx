@@ -1,25 +1,11 @@
 'use client';
 import React from 'react';
-import Image from 'next/image';
 import HeroSection from '@/page-components/HeroSection';
 import FeatureSection from '@/page-components/FeatureSection';
 import CommunitySection from '@/page-components/CommunitySection';
 import ContributorSection from '@/page-components/ContributorSection';
 import PageContainer from '@/page-components/PageContainer';
-// import backgroundImage from '@/assets/hero-8.png';
-
-// const HeroBackground = () => {
-//   return (
-//     <Image
-//       alt="Hero Primary Color"
-//       src={backgroundImage}
-//       placeholder="blur"
-//       fill
-//       style={{
-//         objectFit: 'cover',
-//       }} />
-//   )
-// }
+import ContributeModal from '@/components/ContributeModal';
 
 const HomePage = () => {
   return (
@@ -33,6 +19,7 @@ const HomePage = () => {
         <div className="divider divider-primary mb-12"></div>
         <CommunitySection />
         <ContributorSection />
+        <ContributeModal />
       </PageContainer >
     </>
   );
