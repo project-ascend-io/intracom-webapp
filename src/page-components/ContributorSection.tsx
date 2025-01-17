@@ -10,9 +10,6 @@ const ContributorSection = () => {
   useEffect(() => {
     fetchAllContributors()
       .then((contributors: GithubContributor[]) => {
-
-        console.log('Fetched contributors:', contributors);
-
         const githubContributors: GithubAvatarProps[] = []
         contributors.forEach((contributor: GithubContributor) => {
           githubContributors.push({
@@ -24,9 +21,6 @@ const ContributorSection = () => {
         })
         setContributors(githubContributors);
         setIsLoading(false);
-
-
-
       })
       .catch((error) => console.error('Error fetching contributors:', error));
   }, []);
