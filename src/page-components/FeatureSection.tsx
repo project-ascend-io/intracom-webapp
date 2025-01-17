@@ -7,11 +7,11 @@ type FeatureProps = {
 const FeatureCard = (props: FeatureProps) => {
   const { icon, title, description } = props;
   return (
-    <div className="text-center p-8">
-      <p className="text-xl my-0">{icon}</p>
-      <p className="font-semibold my-0">{title}</p>
-      <p className="my-0">{description}</p>
-    </div >
+    <div className='p-8 text-center'>
+      <p className='my-0 text-xl'>{icon}</p>
+      <p className='my-0 font-semibold'>{title}</p>
+      <p className='my-0'>{description}</p>
+    </div>
   );
 };
 
@@ -20,7 +20,8 @@ const FeatureSection = () => {
     {
       icon: '🏠',
       title: 'Real-Time Messaging with WebSockets',
-      description: 'Experience instant, reliable communication with WebSocket technology.',
+      description:
+        'Experience instant, reliable communication with WebSocket technology.',
     },
     {
       icon: '📱',
@@ -31,18 +32,20 @@ const FeatureSection = () => {
     {
       icon: '💬',
       title: 'Effortless Navigation',
-      description: 'Naviage with ease using intuitive keybindings and a user-friendly interface.',
+      description:
+        'Naviage with ease using intuitive keybindings and a user-friendly interface.',
     },
     {
       icon: '📁',
       title: 'Powered by Modern Technologies',
-      description: 'Built with Typescript, Node.js, and more to ensure performance and scalability',
+      description:
+        'Built with Typescript, Node.js, and more to ensure performance and scalability',
     },
   ];
 
   return (
     <>
-      <div className="container m-auto grid grid-cols-4">
+      <div className='container m-auto grid grid-cols-4'>
         {featureCards.map((card, index) => (
           <FeatureCard
             key={index}
@@ -51,7 +54,7 @@ const FeatureSection = () => {
             description={card.description}
           />
         ))}
-      </div >
+      </div>
     </>
   );
 };

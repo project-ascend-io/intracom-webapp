@@ -10,17 +10,19 @@ import ContributeModal from '@/components/ContributeModal';
 const HomePage = () => {
   return (
     <>
-      <PageContainer className={"min-w-[100vw]"}>
+      <PageContainer className={'min-w-[100vw]'}>
         <HeroSection />
-      </PageContainer >
+      </PageContainer>
       <PageContainer className='mt-0'>
-        <div className="divider divider-primary mt-4"><p className="text-primary uppercase">Features</p></div>
+        <div className='divider divider-primary mt-4'>
+          <p className='uppercase text-primary'>Features</p>
+        </div>
         <FeatureSection />
-        <div className="divider divider-primary mb-12"></div>
+        <div className='divider divider-primary mb-12'></div>
         <CommunitySection />
         <ContributorSection />
         <ContributeModal />
-      </PageContainer >
+      </PageContainer>
     </>
   );
 };

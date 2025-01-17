@@ -7,7 +7,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Intracom',
-  description: 'Intracom is an open-source communication tool designed to empower teams and highlight the skills of talented engineers.',
+  description:
+    'Intracom is an open-source communication tool designed to empower teams and highlight the skills of talented engineers.',
 };
 
 export default function RootLayout({

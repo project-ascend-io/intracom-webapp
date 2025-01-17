@@ -1,5 +1,7 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
+
 export default function DownloadPage() {
   const getDefaultPath = (): string | undefined => {
     const userAgent = navigator.userAgent;
@@ -77,7 +79,7 @@ export default function DownloadPage() {
             </button>
           </div>
           <div className='hidden lg:block'>
-            <img
+            <Image
               className='rounded-xl'
               src='https://picsum.photos/200/600'
               alt='intracom-banner'

@@ -14,10 +14,10 @@ export default function PublicLayout({ children }: Props) {
         <Navigation />
       </PageContainer>
       <main>{children}</main>
-      <PageContainer className="bg-primary-900 min-w-[100vw]">
+      <PageContainer className='min-w-[100vw] bg-primary-900'>
         <CtaSection />
-      </PageContainer >
-      <PageContainer className="bg-primary-500 min-w-[100vw]">
+      </PageContainer>
+      <PageContainer className='min-w-[100vw] bg-primary-500'>
         <FooterSection />
       </PageContainer>
     </div>

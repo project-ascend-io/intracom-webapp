@@ -1,6 +1,6 @@
-import { LoginFormType } from "@/types/login";
-import { fetchFromAPI } from "@/utils/fetch";
-import { ResponseObject } from "@/types/http";
+import { LoginFormType } from '@/types/login';
+import { fetchFromAPI } from '@/utils/fetch';
+import { ResponseObject } from '@/types/http';
 
 /**
  * Login user
@@ -9,16 +9,16 @@ import { ResponseObject } from "@/types/http";
  */
 export async function login(formData: LoginFormType): Promise<ResponseObject> {
   const fetchParams = {
-    method: "POST",
-    endpoint: "/auth/login",
+    method: 'POST',
+    endpoint: '/auth/login',
     body: JSON.stringify(formData),
-    errorMessage: "Failed to login user",
+    errorMessage: 'Failed to login user',
   };
 
   const data = await fetchFromAPI(fetchParams);
 
   if (data.success)
-    localStorage.setItem("intracom-user", JSON.stringify(data.responseObject));
+    localStorage.setItem('intracom-user', JSON.stringify(data.responseObject));
 
   return data;
 }
@@ -29,16 +29,16 @@ export async function login(formData: LoginFormType): Promise<ResponseObject> {
  */
 export async function checkSession(): Promise<ResponseObject> {
   const fetchParams = {
-    method: "GET",
-    endpoint: "/auth/check",
-    errorMessage: "Failed to validate user session",
+    method: 'GET',
+    endpoint: '/auth/check',
+    errorMessage: 'Failed to validate user session',
   };
 
   const data = await fetchFromAPI(fetchParams);
 
   if (data.success)
-    localStorage.setItem("intracom-user", JSON.stringify(data.responseObject));
-  else localStorage.removeItem("intracom-user");
+    localStorage.setItem('intracom-user', JSON.stringify(data.responseObject));
+  else localStorage.removeItem('intracom-user');
 
   return data;
 }
@@ -49,14 +49,14 @@ export async function checkSession(): Promise<ResponseObject> {
  */
 export async function logout(): Promise<ResponseObject> {
   const fetchParams = {
-    method: "POST",
-    endpoint: "/auth/logout",
-    errorMessage: "Failed to logout user",
+    method: 'POST',
+    endpoint: '/auth/logout',
+    errorMessage: 'Failed to logout user',
   };
 
   const data = await fetchFromAPI(fetchParams);
 
-  if (data.success) localStorage.removeItem("intracom-user");
+  if (data.success) localStorage.removeItem('intracom-user');
 
   return data;
 }

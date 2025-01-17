@@ -25,7 +25,6 @@
  */
 @tailwind variants;
 
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -107,7 +106,6 @@
     margin-inline-end: 0px;
     padding-inline-start: 40px;
   }
-
 
   li {
     display: list-item;
