@@ -9,7 +9,7 @@ const Navigation = () => {
     <>
       <div className='lg:container-lg container-xl navbar m-auto py-4'>
         <div className='flex-1'>
-          <a className='btn btn-ghost text-xl text-white'>
+          <a href='/' className='btn btn-ghost text-xl text-white'>
             <Image className='mr-2' src={horizontal_logo} alt='Intracom' />
             <span className='hidden lg:block'>Intracom</span>
           </a>
