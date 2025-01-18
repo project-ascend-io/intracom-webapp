@@ -10,8 +10,8 @@ const Navigation = () => {
       <div className='lg:container-lg container-xl navbar m-auto py-4'>
         <div className='flex-1'>
           <a className='btn btn-ghost text-xl text-white'>
-            <Image className='mr-2' src={horizontal_logo} alt='Intracom' />{' '}
-            Intracom
+            <Image className='mr-2' src={horizontal_logo} alt='Intracom' />
+            <span className="hidden lg:block">Intracom</span>
           </a>
         </div>
         <div className='hidden md:block md:flex-none'>
@@ -28,7 +28,7 @@ const Navigation = () => {
           </ul>
         </div>
         <div className="flex-none md:hidden">
-          <div className="dropdown">
+          <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost text-white btn-circle">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ const Navigation = () => {
               <li><a>Contributor</a></li>
               <li>
                 <a>
-                  <button onClick={openContributeModal} className='btn btn-outline rounded-md border-2 px-10 uppercase text-white'>
+                  <button onClick={openContributeModal} className='btn btn-outline btn-info rounded-md border-2 px-4 uppercase text-white w-fit'>
                     Contribute Now
                   </button>
                 </a>

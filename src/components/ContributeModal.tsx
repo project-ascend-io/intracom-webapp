@@ -1,7 +1,7 @@
 const ContributeModal = () => {
   return (
     <>
-      <dialog id='contribute-modal' className='modal'>
+      <dialog id='contribute-modal' className='modal modal-bottom max-w-[100vw] sm:max-w-none sm:modal-middle'>
         <div className='modal-box'>
           <h3 className='mb-4 mt-2 text-lg font-bold'>
             Contribute to Intracom
@@ -26,6 +26,11 @@ const ContributeModal = () => {
             </a>{' '}
             to begin your journey and make your mark on Intracom.
           </p>
+          <div className="flex justify-center">
+            <form method='dialog'>
+              <button className="btn btn-secondary uppercase px-14">close</button>
+            </form>
+          </div>
         </div>
         <form method='dialog' className='modal-backdrop'>
           <button>close</button>
