@@ -56,16 +56,16 @@ const Navigation = () => {
               className='menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow'
             >
               <li>
-                <a>Home</a>
+                <a href='/'>Home</a>
               </li>
               <li>
-                <a>About</a>
+                <a href='/about'>About</a>
               </li>
               <li>
-                <a>Community</a>
+                <a href='/#community'>Community</a>
               </li>
               <li>
-                <a>Contributor</a>
+                <a href='/#contributors'>Contributor</a>
               </li>
               <li>
                 <a>
