@@ -5,7 +5,6 @@ import FeatureSection from '@/page-components/FeatureSection';
 import CommunitySection from '@/page-components/CommunitySection';
 import ContributorSection from '@/page-components/ContributorSection';
 import PageContainer from '@/page-components/PageContainer';
-import ContributeModal from '@/components/ContributeModal';
 
 const HomePage = () => {
   return (
@@ -21,7 +20,6 @@ const HomePage = () => {
         <div className='divider divider-primary mb-12'></div>
         <CommunitySection />
         <ContributorSection />
-        <ContributeModal />
       </PageContainer>
     </>
   );

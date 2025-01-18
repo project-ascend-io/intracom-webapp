@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import Navigation from '@/page-components/Navigation';
 import CtaSection from '@/page-components/CtaSection';
 import FooterSection from '@/page-components/FooterSection';
+import ContributeModal from '@/components/ContributeModal';
 
 type Props = {
   children: ReactNode;
@@ -20,6 +21,7 @@ export default function PublicLayout({ children }: Props) {
       <PageContainer className='min-w-[100vw] bg-primary-500'>
         <FooterSection />
       </PageContainer>
+      <ContributeModal />
     </div>
   );
 }
