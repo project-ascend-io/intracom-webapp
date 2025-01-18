@@ -5,7 +5,7 @@ import contribute_image from '@/assets/dalle-contribute.webp';
 const AboutPage = () => {
   return (
     <>
-      <PageContainer className='mb-14 min-w-[100vw] bg-primary-900 py-24'>
+      <PageContainer className='mb-14 min-w-[100vw] bg-primary-900 py-20'>
         <div className='container m-auto'>
           <h2 className='text-white'>
             About Intracom: Contribue. Showcase. Get Recognized.
@@ -13,8 +13,8 @@ const AboutPage = () => {
         </div>
       </PageContainer>
       <PageContainer>
-        <div className='grid grid-cols-2'>
-          <div className='mt-12'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:py-20 lg:py-0'>
+          <div className='xl:mt-12'>
             <h3 className='mb-6'>
               An Open-Source Project Showcasing Engineering Talent
             </h3>
@@ -29,13 +29,13 @@ const AboutPage = () => {
             <Image
               src={contribute_image}
               alt='Intracom'
-              className='max-w-lg rounded-xl'
+              className='lg:max-w-sm rounded-xl'
             />
           </div>
         </div>
         <div className='divider divider-primary my-12'></div>
         <div className='flex min-h-screen items-center'>
-          <div className='m-auto w-[80%]'>
+          <div className='m-auto lg:w-[80%]'>
             <h2>Our Mission</h2>
             <h3>Empowering Engineers Through Open Source</h3>
             <p>Intracom is designed to help engineers:</p>
