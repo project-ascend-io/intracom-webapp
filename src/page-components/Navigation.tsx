@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import NavLink from '@/components/NavLink';
 import Image from 'next/image';
 import horizontal_logo from '../assets/white-logo.png';
@@ -11,7 +11,7 @@ const Navigation = () => {
         <div className='flex-1'>
           <a className='btn btn-ghost text-xl text-white'>
             <Image className='mr-2' src={horizontal_logo} alt='Intracom' />
-            <span className="hidden lg:block">Intracom</span>
+            <span className='hidden lg:block'>Intracom</span>
           </a>
         </div>
         <div className='hidden md:block md:flex-none'>
@@ -21,37 +21,58 @@ const Navigation = () => {
             <NavLink label='Community' hyperlink='/#community' />
             <NavLink label='Contributors' hyperlink='/#contributors' />
             <li className='ml-4'>
-              <button onClick={openContributeModal} className='btn btn-outline rounded-md border-2 px-10 uppercase text-white'>
+              <button
+                onClick={openContributeModal}
+                className='btn btn-outline rounded-md border-2 px-10 uppercase text-white'
+              >
                 Contribute Now
               </button>
             </li>
           </ul>
         </div>
-        <div className="flex-none md:hidden">
-          <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost text-white btn-circle">
+        <div className='flex-none md:hidden'>
+          <div className='dropdown dropdown-end'>
+            <div
+              tabIndex={0}
+              role='button'
+              className='btn btn-circle btn-ghost text-white'
+            >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="inline-block h-5 w-5 stroke-current">
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                className='inline-block h-5 w-5 stroke-current'
+              >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"></path>
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M4 6h16M4 12h16M4 18h16'
+                ></path>
               </svg>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-              <li><a>Home</a></li>
-              <li><a>About</a></li>
-              <li><a>Community</a></li>
-              <li><a>Contributor</a></li>
+              className='menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow'
+            >
+              <li>
+                <a>Home</a>
+              </li>
+              <li>
+                <a>About</a>
+              </li>
+              <li>
+                <a>Community</a>
+              </li>
+              <li>
+                <a>Contributor</a>
+              </li>
               <li>
                 <a>
-                  <button onClick={openContributeModal} className='btn btn-outline btn-info rounded-md border-2 px-4 uppercase text-white w-fit'>
+                  <button
+                    onClick={openContributeModal}
+                    className='btn btn-outline btn-info w-fit rounded-md border-2 px-4 uppercase text-white'
+                  >
                     Contribute Now
                   </button>
                 </a>

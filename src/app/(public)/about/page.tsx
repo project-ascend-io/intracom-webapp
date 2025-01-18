@@ -13,7 +13,7 @@ const AboutPage = () => {
         </div>
       </PageContainer>
       <PageContainer>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:py-20 lg:py-0'>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:py-20 lg:py-0'>
           <div className='xl:mt-12'>
             <h3 className='mb-6'>
               An Open-Source Project Showcasing Engineering Talent
@@ -29,7 +29,7 @@ const AboutPage = () => {
             <Image
               src={contribute_image}
               alt='Intracom'
-              className='lg:max-w-sm rounded-xl'
+              className='rounded-xl lg:max-w-sm'
             />
           </div>
         </div>

@@ -132,7 +132,6 @@
 
 /* Breakpoints (following common standards like Tailwind CSS) */
 @media (min-width: 640px) {
-
   /* Small screens */
   .container-sm {
     max-width: 640px;
@@ -140,7 +139,6 @@
 }
 
 @media (min-width: 768px) {
-
   /* Medium screens */
   .container-md {
     max-width: 768px;
@@ -148,7 +146,6 @@
 }
 
 @media (min-width: 1024px) {
-
   /* Large screens */
   .container-lg {
     max-width: 1024px;
@@ -156,7 +153,6 @@
 }
 
 @media (min-width: 1280px) {
-
   /* Extra Large screens */
   .container-xl {
     max-width: 1280px;
@@ -164,7 +160,6 @@
 }
 
 @media (min-width: 1536px) {
-
   /* 2XL screens */
   .container-2xl {
     max-width: 1536px;

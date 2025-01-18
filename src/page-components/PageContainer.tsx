@@ -6,7 +6,16 @@ type PageContainerProps = {
 };
 
 const PageContainer = ({ children, className }: PageContainerProps) => {
-  return <div className={clsx('container md:container-md xl:container-xl m-auto', className)}>{children}</div>;
+  return (
+    <div
+      className={clsx(
+        'md:container-md xl:container-xl container m-auto',
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default PageContainer;
