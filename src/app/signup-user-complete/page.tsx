@@ -1,7 +1,7 @@
 'use client';
 const app_url = process.env.APP_URL as string;
 const api_url = process.env.NEXT_PUBLIC_API_URL as string;
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
@@ -37,12 +37,11 @@ const SignupUserComplete: React.FC = () => {
   }: AdminSignUpForm) => {
     try {
       const response = await fetch(`${api_url}/users`, {
-       
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-       
+
         body: JSON.stringify({
           email,
           username: userName,

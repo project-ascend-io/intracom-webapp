@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React, { FC } from "react";
-import toTitleCase from "@/utils/titlecase";
-import { InputProps } from "@/types/input";
+import React, { FC } from 'react';
+import toTitleCase from '@/utils/titlecase';
+import { InputProps } from '@/types/input';
 
 const Input: FC<InputProps> = ({
   name,
@@ -13,24 +13,24 @@ const Input: FC<InputProps> = ({
   helperText,
 }) => {
   return (
-    <div className="form-control">
-      <label className="font-bold mb-1.5" htmlFor={name}>
+    <div className='form-control'>
+      <label className='mb-1.5 font-bold' htmlFor={name}>
         {toTitleCase(name)}
       </label>
-      {errors[name] && (
-        <span className="text-rose-600 mb-2.5 text-sm">
-          {errors[name]?.message}
+      {errors[name as keyof typeof errors] && (
+        <span className='mb-2.5 text-sm text-rose-600'>
+          {errors[name as keyof typeof errors]?.message}
         </span>
       )}
       <input
-        className="input  border-gray-300 rounded-md input-primary focus:outline-none"
+        className='input input-primary rounded-md border-gray-300 focus:outline-none'
         id={name}
         type={type}
-        {...register(name)}
+        {...register(name as 'email' | 'password')}
         placeholder={placeholder}
       />
       {helperText && (
-        <span className="label text-xs text-gray-400">{helperText}</span>
+        <span className='label text-xs text-gray-400'>{helperText}</span>
       )}
     </div>
   );

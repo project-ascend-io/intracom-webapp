@@ -1,6 +1,29 @@
+/**
+ * This injects Tailwind's base styles and any base styles registered by
+ * plugins.
+ */
 @tailwind base;
+
+/**
+ * This injects Tailwind's component classes and any component classes
+ * registered by plugins.
+ */
 @tailwind components;
+
+/**
+ * This injects Tailwind's utility classes and any utility classes registered
+ * by plugins.
+ */
 @tailwind utilities;
+
+/**
+ * Use this directive to control where Tailwind injects the hover, focus,
+ * responsive, dark mode, and other variants of each class.
+ *
+ * If omitted, Tailwind will append these classes to the very end of
+ * your stylesheet by default.
+ */
+@tailwind variants;
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -16,18 +39,129 @@
   }
 }
 
-/* body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
+@layer base {
+  h1 {
+    display: block;
+    font-size: 2.986rem;
+    margin-block-start: 0.98rem;
+    margin-block-end: 0.98rem;
+    @apply font-bold;
+  }
+
+  h2 {
+    display: block;
+    font-size: 2.488rem;
+    margin-block-start: 1.36rem;
+    margin-block-end: 1.36rem;
+    @apply font-bold;
+  }
+
+  h3 {
+    display: block;
+    font-size: 2.074rem;
+    margin-block-start: 1.76rem;
+    margin-block-end: 1.76rem;
+    @apply font-bold;
+  }
+
+  h4 {
+    display: block;
+    font-size: 1.728rem;
+    margin-block-start: 2.39rem;
+    margin-block-end: 2.36rem;
+    @apply font-bold;
+  }
+
+  h5 {
+    display: block;
+    font-size: 1.44rem;
+    margin-block-start: 2.88rem;
+    margin-block-end: 2.88rem;
+    @apply font-semibold;
+  }
+
+  h6 {
+    display: block;
+    font-size: 1.2rem;
+    margin-block-start: 3.6rem;
+    margin-block-end: 3.6rem;
+    @apply font-semibold;
+  }
+
+  p {
+    @apply text-base;
+    margin-bottom: 10px;
+  }
+
+  small {
+    @apply text-sm;
+  }
+
+  ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+  }
+
+  li {
+    display: list-item;
+  }
+}
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+/* General Container Reset */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  /* 16px padding for small screens */
+  padding-right: 1rem;
+  /* 16px padding for small screens */
+  box-sizing: border-box;
+}
+
+/* Breakpoints (following common standards like Tailwind CSS) */
+@media (min-width: 640px) {
+  /* Small screens */
+  .container-sm {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  /* Medium screens */
+  .container-md {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Large screens */
+  .container-lg {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  /* Extra Large screens */
+  .container-xl {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  /* 2XL screens */
+  .container-2xl {
+    max-width: 1536px;
   }
 }

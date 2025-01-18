@@ -1,4 +1,4 @@
-import { FetchParametersType, ResponseObject } from "@/types/http";
+import { FetchParametersType, ResponseObject } from '@/types/http';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -15,8 +15,8 @@ export async function fetchFromAPI(
 ): Promise<ResponseObject> {
   try {
     const response = await fetch(`${BASE_URL}${params.endpoint}`, {
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       ...params,
     });
 

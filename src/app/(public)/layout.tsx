@@ -1,4 +1,9 @@
+import PageContainer from '@/page-components/PageContainer';
 import { ReactNode } from 'react';
+import Navigation from '@/page-components/Navigation';
+import CtaSection from '@/page-components/CtaSection';
+import FooterSection from '@/page-components/FooterSection';
+import ContributeModal from '@/components/ContributeModal';
 
 type Props = {
   children: ReactNode;
@@ -6,12 +11,17 @@ type Props = {
 export default function PublicLayout({ children }: Props) {
   return (
     <div className='w-full'>
-      <div className='w-full border-b-2 border-solid'>
-        <div className='container navbar md:mx-auto'>
-          <a className='btn btn-ghost text-xl'>Intracom</a>
-        </div>
-      </div>
-      <main className='container mx-auto px-4 md:px-0'>{children}</main>
+      <PageContainer className='sticky left-0 right-0 top-0 z-50 min-w-[100vw] bg-primary-500'>
+        <Navigation />
+      </PageContainer>
+      <main>{children}</main>
+      <PageContainer className='min-w-[100vw] bg-primary-900'>
+        <CtaSection />
+      </PageContainer>
+      <PageContainer className='min-w-[100vw] bg-primary-500'>
+        <FooterSection />
+      </PageContainer>
+      <ContributeModal />
     </div>
   );
 }

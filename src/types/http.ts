@@ -1,12 +1,12 @@
 export interface ResponseObject {
   success: boolean;
   message: string;
-  responseObject: any;
+  responseObject: unknown;
   statusCode: number;
 }
 export type FetchParametersType = {
   method: string;
   endpoint: string;
   errorMessage: string;
-  [key: string]: any;
+  [key: string]: unknown;
 };

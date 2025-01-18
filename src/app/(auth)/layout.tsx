@@ -3,6 +3,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { checkSession } from '@/services/auth';
 import { useAuth } from '@/context/auth';
 import { redirect } from 'next/navigation';
+import { AuthUserType } from '@/types/auth';
 
 type Props = {
   children: ReactNode;
@@ -13,7 +14,17 @@ export default function AuthLayout({ children }: Props) {
 
   async function checkUserSession() {
     const data = await checkSession();
-    if (data?.success) setUser(data.responseObject);
+
+    if (data?.success) {
+      if (
+        typeof data.responseObject === 'object' &&
+        data.responseObject !== null
+      ) {
+        setUser(data.responseObject as AuthUserType);
+      } else {
+        console.error('responseObject is not of type AuthUserType');
+      }
+    }
 
     setLoading(false);
   }
