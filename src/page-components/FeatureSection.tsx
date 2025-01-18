@@ -45,7 +45,7 @@ const FeatureSection = () => {
 
   return (
     <>
-      <div className='container m-auto grid grid-cols-4'>
+      <div className='container m-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4'>
         {featureCards.map((card, index) => (
           <FeatureCard
             key={index}

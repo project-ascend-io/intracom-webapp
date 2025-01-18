@@ -7,7 +7,7 @@ const CommunitySection = () => {
     <>
       <div
         id='community'
-        className='flex min-h-screen items-center justify-between gap-6'
+        className='flex flex-col-reverse md:flex-row  min-h-screen items-center justify-between gap-6'
       >
         <div className='grow'>
           <h3>Join a Global Community of Contributors</h3>

@@ -18,7 +18,7 @@ const FooterLabel = ({ children, className }: FooterLabelProps) => {
 const FooterSection = () => {
   return (
     <>
-      <footer className='container footer m-auto bg-primary p-10 text-base-content'>
+      <footer className='container-xl footer m-auto bg-primary p-10 text-base-content'>
         <aside>
           <Image className='fill-current' src={white_logo} alt='Intracom' />
           <p className='text-white'>

@@ -5,10 +5,10 @@ import { openContributeModal } from '@/components/ContributeModal';
 const HeroSection = () => {
   return (
     <>
-      <section className='container hero m-auto min-h-screen bg-base-200 pb-[175px]'>
+      <section className='container lg:hero m-auto min-h-screen bg-base-200 md:pt-20 lg:pt-0 pb-[175px]'>
         <div className='hero-content'>
-          <div className='grid grid-cols-2 gap-24'>
-            <div className='col-span-3 flex items-center'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 xl:gap-24'>
+            <div className='flex items-center'>
               <div>
                 <h2>Contribute. Showcase. Get Recognized.</h2>
                 <p>
@@ -35,9 +35,9 @@ const HeroSection = () => {
                 </span>
               </div>
             </div>
-            <div className='col-start-5'>
+            <div className='row-start-1 lg:row-auto'>
               <Image
-                className='max-w-xl rounded-md border-[.5px] shadow-lg'
+                className='w-[100vw] md:max-w-xl rounded-md border-[.5px] shadow-lg'
                 src={reaction_image}
                 alt='intracom app'
               />
