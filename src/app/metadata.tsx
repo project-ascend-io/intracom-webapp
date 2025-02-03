@@ -1,4 +1,4 @@
-import type { Metadata, MetadataRoute, Viewport } from 'next';
+import type { Metadata } from 'next';
 
 const metadataTemplate: Metadata = {
   metadataBase: new URL('https://intracom.app'),

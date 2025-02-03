@@ -2,7 +2,6 @@
 const app_url = process.env.APP_URL as string;
 const api_url = process.env.NEXT_PUBLIC_API_URL as string;
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -139,7 +138,11 @@ const SignupUserComplete: React.FC = () => {
                   onClick={togglePasswordVisibility}
                   className='absolute'
                 >
-                  {showPassword ? <FiEyeOff className='relative bottom-[27px] left-[350px]' /> : <FiEye className='relative bottom-[27px] left-[350px]' />}
+                  {showPassword ? (
+                    <FiEyeOff className='relative bottom-[27px] left-[350px]' />
+                  ) : (
+                    <FiEye className='relative bottom-[27px] left-[350px]' />
+                  )}
                 </button>
                 {!errors.password && password && (
                   <label className='mb-4 text-xs text-gray-400'>
