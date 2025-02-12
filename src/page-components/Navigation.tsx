@@ -3,8 +3,76 @@ import NavLink from '@/components/NavLink';
 import Image from 'next/image';
 import horizontal_logo from '../assets/white-logo.png';
 import { openContributeModal } from '@/components/ContributeModal';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/auth';
 
 const Navigation = () => {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  let isLoggedIn = !!user;
+
+  let unauthButtons = (
+    <>
+      <NavLink label='Login' hyperlink='/login' />
+      <li className='ml-4'>
+        <button
+          onClick={openContributeModal}
+          className='btn btn-outline rounded-md border-2 px-10 uppercase text-white'
+        >
+          Contribute Now
+        </button>
+      </li>
+    </>
+  )
+
+  let authButtons = (
+    <>
+      <li className='ml-4'>
+        <button
+          onClick={() => router.push('/auth/download')}
+          className='btn btn-outline rounded-md border-2 px-10 uppercase text-white'
+        >
+          Download
+        </button>
+      </li>
+    </>
+  )
+
+  let mobileUnauthButtons = (
+    <>
+      <li>
+        <a href='/login'>Login</a>
+      </li>
+      <li>
+        <a>
+          <button
+            onClick={openContributeModal}
+            className='btn btn-outline btn-info w-fit rounded-md border-2 px-4 uppercase text-white'
+          >
+            Contribute Now
+          </button>
+        </a>
+      </li>
+    </>
+  )
+
+  let mobileAuthButtons = (
+    <>
+      <li>
+        <a>
+          <button
+            onClick={() => router.push('/auth/download')}
+            className='btn btn-outline btn-info w-fit rounded-md border-2 px-4 uppercase text-white'
+          >
+            Download
+          </button>
+        </a>
+      </li>
+    </>
+  )
+
+
   return (
     <>
       <div className='lg:container-lg container-xl navbar m-auto py-4'>
@@ -20,15 +88,7 @@ const Navigation = () => {
             <NavLink label='About' hyperlink='/about' />
             <NavLink label='Community' hyperlink='/#community' />
             <NavLink label='Contributors' hyperlink='/#contributors' />
-            <NavLink label='Login' hyperlink='/login' />
-            <li className='ml-4'>
-              <button
-                onClick={openContributeModal}
-                className='btn btn-outline rounded-md border-2 px-10 uppercase text-white'
-              >
-                Contribute Now
-              </button>
-            </li>
+            {isLoggedIn ? authButtons : unauthButtons}
           </ul>
         </div>
         <div className='flex-none md:hidden'>
@@ -68,19 +128,7 @@ const Navigation = () => {
               <li>
                 <a href='/#contributors'>Contributor</a>
               </li>
-              <li>
-                <a href='/login'>Login</a>
-              </li>
-              <li>
-                <a>
-                  <button
-                    onClick={openContributeModal}
-                    className='btn btn-outline btn-info w-fit rounded-md border-2 px-4 uppercase text-white'
-                  >
-                    Contribute Now
-                  </button>
-                </a>
-              </li>
+              {isLoggedIn ? mobileAuthButtons : mobileUnauthButtons}
             </ul>
           </div>
         </div>
