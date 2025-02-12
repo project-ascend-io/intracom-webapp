@@ -1,9 +1,10 @@
 'use client';
 import { ReactNode, useEffect, useState } from 'react';
-import { checkSession } from '@/services/auth';
+import { checkSession, logout } from '@/services/auth';
 import { useAuth } from '@/context/auth';
 import { redirect } from 'next/navigation';
 import { AuthUserType } from '@/types/auth';
+import { useRouter } from 'next/navigation'
 
 type Props = {
   children: ReactNode;
@@ -11,6 +12,7 @@ type Props = {
 export default function AuthLayout({ children }: Props) {
   const [loading, setLoading] = useState(true);
   const { user, setUser } = useAuth();
+  const router = useRouter();
 
   async function checkUserSession() {
     const data = await checkSession();
@@ -35,11 +37,18 @@ export default function AuthLayout({ children }: Props) {
 
   if (loading) return;
 
+  const logOut = async () => {
+    await logout();
+    // @ts-ignore
+    setUser(null);
+  }
+
   return user ? (
     <div className='w-full'>
       <div className='w-full border-b-2 border-solid'>
         <div className='container navbar md:mx-auto'>
-          <a className='btn btn-ghost text-xl'>Intracom</a>
+          <a href='/' className='btn btn-ghost text-xl'>Intracom</a>
+          <button onClick={logOut} className="ml-auto">Logout</button>
         </div>
       </div>
       <main className='container mx-auto px-4 md:px-0'>{children}</main>

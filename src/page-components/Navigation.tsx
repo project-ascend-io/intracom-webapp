@@ -20,6 +20,7 @@ const Navigation = () => {
             <NavLink label='About' hyperlink='/about' />
             <NavLink label='Community' hyperlink='/#community' />
             <NavLink label='Contributors' hyperlink='/#contributors' />
+            <NavLink label='Login' hyperlink='/login' />
             <li className='ml-4'>
               <button
                 onClick={openContributeModal}
@@ -66,6 +67,9 @@ const Navigation = () => {
               </li>
               <li>
                 <a href='/#contributors'>Contributor</a>
+              </li>
+              <li>
+                <a href='/login'>Login</a>
               </li>
               <li>
                 <a>

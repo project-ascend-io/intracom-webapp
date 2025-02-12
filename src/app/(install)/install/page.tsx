@@ -1,14 +1,14 @@
 'use client';
-const app_url = process.env.APP_URL as string;
-const api_url = process.env.NEXT_PUBLIC_API_URL as string;
+const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 import React, { useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AdminSignUpForm, AdminSignupFormSchema } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link'
 
-const SignupUserComplete: React.FC = () => {
+const InstallPage: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -35,12 +35,12 @@ const SignupUserComplete: React.FC = () => {
     instanceUrl,
   }: AdminSignUpForm) => {
     try {
-      const response = await fetch(`${api_url}/users`, {
+      const response = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-
+        cache: 'no-cache',
         body: JSON.stringify({
           email,
           username: userName,
@@ -196,20 +196,10 @@ const SignupUserComplete: React.FC = () => {
             </form>
             <p className='mt-4 text-center text-sm text-gray-600'>
               By proceeding to create your account and use Intracom, you agree
-              to our{' '}
-              <a
-                href={`${app_url}/terms-of-use/`}
-                className='text-blue-600 underline'
-              >
-                Terms of Use
-              </a>{' '}
-              and{' '}
-              <a
-                href={`${app_url}/privacy-policy/`}
-                className='text-blue-600 underline'
-              >
-                Privacy Policy
-              </a>
+              to our &nbsp;
+              <Link className="underline text-blue-500" href="/terms-of-use">Terms of Use</Link>
+              &nbsp; and &nbsp;
+              <Link className="underline text-blue-500" href="/privacy-policy">Privacy Policy</Link>
               . If you do not agree, you cannot use Intracom.
             </p>
           </div>
@@ -219,4 +209,4 @@ const SignupUserComplete: React.FC = () => {
   );
 };
 
-export default SignupUserComplete;
+export default InstallPage;
