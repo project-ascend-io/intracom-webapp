@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AdminSignUpForm, AdminSignupFormSchema } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link'
+import Link from 'next/link';
 
 const InstallPage: React.FC = () => {
   const {
@@ -197,9 +197,13 @@ const InstallPage: React.FC = () => {
             <p className='mt-4 text-center text-sm text-gray-600'>
               By proceeding to create your account and use Intracom, you agree
               to our &nbsp;
-              <Link className="underline text-blue-500" href="/terms-of-use">Terms of Use</Link>
+              <Link className='text-blue-500 underline' href='/terms-of-use'>
+                Terms of Use
+              </Link>
               &nbsp; and &nbsp;
-              <Link className="underline text-blue-500" href="/privacy-policy">Privacy Policy</Link>
+              <Link className='text-blue-500 underline' href='/privacy-policy'>
+                Privacy Policy
+              </Link>
               . If you do not agree, you cannot use Intracom.
             </p>
           </div>

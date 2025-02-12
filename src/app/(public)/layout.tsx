@@ -14,7 +14,7 @@ export default function PublicLayout({ children }: Props) {
       <PageContainer className='sticky left-0 right-0 top-0 z-50 min-w-[100vw] bg-primary-500'>
         <Navigation />
       </PageContainer>
-      <main className="md:min-h-[60vh]">{children}</main>
+      <main className='md:min-h-[60vh]'>{children}</main>
       <PageContainer className='min-w-[100vw] bg-primary-900'>
         <CtaSection />
       </PageContainer>

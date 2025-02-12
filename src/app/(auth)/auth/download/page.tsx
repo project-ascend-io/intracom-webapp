@@ -72,7 +72,7 @@ export default function DownloadPage() {
               Already have the app?
             </p>
             <button
-              className='btn btn-secondary imary w-72 rounded-xl p-3'
+              className='imary btn btn-secondary w-72 rounded-xl p-3'
               onClick={handleOpenApp}
             >
               Open Intracom

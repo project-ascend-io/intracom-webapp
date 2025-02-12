@@ -1,10 +1,8 @@
-'use client'
+'use client';
 import clsx from 'clsx';
 import Image from 'next/image';
 import white_logo from '../assets/white-logo.png';
 import Link from 'next/link';
-
-const APP_URL = process.env.APP_URL as string;
 
 type FooterLabelProps = {
   children: string;
@@ -69,13 +67,15 @@ const FooterSection = () => {
         </nav>
         <nav className='text-white'>
           <FooterLabel>Legal</FooterLabel>
-          <Link className='link-hover link' href="/terms-of-use">Terms of use</Link>
+          <Link className='link-hover link' href='/terms-of-use'>
+            Terms of use
+          </Link>
           <a className='link-hover link' href='/privacy-policy'>
             Privacy policy
           </a>
           <a className='link-hover link'>Cookie policy</a>
         </nav>
-      </footer >
+      </footer>
     </>
   );
 };

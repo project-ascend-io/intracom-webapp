@@ -17,9 +17,9 @@ export default function Login() {
   const router = useRouter();
 
   useEffect(() => {
-    setIsLoading(false)
-    setAuthError(null)
-  }, [])
+    setIsLoading(false);
+    setAuthError(null);
+  }, []);
 
   const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
     setAuthError('');
@@ -69,7 +69,7 @@ export default function Login() {
         </div>
       )}
       <form
-        method="POST"
+        method='POST'
         className='flex w-full max-w-sm flex-col gap-5'
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -88,15 +88,19 @@ export default function Login() {
           errors={errors}
         />
         <button
-          type="button"
+          type='button'
           className='link link-primary self-start font-bold no-underline'
-          onClick={() => router.push('/forgot-password')}>
+          onClick={() => router.push('/forgot-password')}
+        >
           Forgot Password?
         </button>
-        <button className={`btn btn-primary text-white ${isLoading ? 'btn-neutral' : ''}`} disabled={isLoading}>
+        <button
+          className={`btn btn-primary text-white ${isLoading ? 'btn-neutral' : ''}`}
+          disabled={isLoading}
+        >
           {isLoading ? 'Logging In...' : 'Login'}
         </button>
       </form>
-    </section >
+    </section>
   );
 }

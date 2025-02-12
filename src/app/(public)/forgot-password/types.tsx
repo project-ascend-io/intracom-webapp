@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 export type ForgotPasswordForm = {
-  email: string
-}
+  email: string;
+};
 
 export const ForgotPasswordFormSchema = z.object({
-  email: z.string().email()
+  email: z.string().email(),
 });

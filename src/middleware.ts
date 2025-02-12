@@ -1,14 +1,15 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
+import AxiosApiInstance from './ApiInstance';
 
 const checkInstallion = async () => {
   try {
-    const response = await fetch(`${API_URL}/install`, {
-      cache: 'no-store',
-    });
-    return response.json();
+    const response = await AxiosApiInstance.get('/install');
+    console.log('Check Installation: ', response.status);
+    if (response.status === 200) {
+      return response.data;
+    }
+    return false;
   } catch (err) {
     console.log('Check Installation Error: ', err);
     return false;
@@ -16,18 +17,18 @@ const checkInstallion = async () => {
 };
 
 export async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname == '/install') {
-    console.log('[Middleware] Path: ', request.nextUrl.pathname);
+  console.log('[Middleware] Path: ', request.nextUrl.pathname);
 
+  if (request.nextUrl.pathname == '/install') {
     const isCompleted = await checkInstallion();
     console.log('[Middleware] - isCompleted: ', isCompleted);
 
-    if (isCompleted) {
-      return NextResponse.redirect(new URL('/logout', request.url));
+    if (isCompleted && isCompleted.responseObject) {
+      return NextResponse.redirect(new URL('/login', request.url));
     }
   }
 }
 
 export const config = {
-  matcher: '/install',
+  matcher: ['/install'],
 };
