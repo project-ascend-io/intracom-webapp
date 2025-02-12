@@ -5,10 +5,16 @@ import horizontal_logo from '../assets/white-logo.png';
 import { openContributeModal } from '@/components/ContributeModal';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/auth';
+import { logout } from '@/services/auth';
 
 const Navigation = () => {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const router = useRouter();
+
+  const logOut = async () => {
+    await logout();
+    setUser(null!);
+  }
 
   let isLoggedIn = !!user;
 
@@ -28,6 +34,7 @@ const Navigation = () => {
 
   let authButtons = (
     <>
+      <NavLink label="Logout" hyperlink='' onClick={logOut} />
       <li className='ml-4'>
         <button
           onClick={() => router.push('/auth/download')}
@@ -59,6 +66,9 @@ const Navigation = () => {
 
   let mobileAuthButtons = (
     <>
+      <li>
+        <a onClick={logOut}>Logout</a>
+      </li>
       <li>
         <a>
           <button
