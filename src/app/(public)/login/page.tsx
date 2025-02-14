@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '@/components/input';
 import { redirect } from 'next/navigation';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -8,24 +8,27 @@ import { LoginFormType, loginSchema } from '@/types/login';
 import { login } from '@/services/auth';
 import { useAuth } from '@/context/auth';
 import { AuthUserType } from '@/types/auth';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
-  const [authError, setAuthError] = useState('');
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { user, setUser } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    setIsLoading(false);
+    setAuthError(null);
+  }, []);
 
   const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
     setAuthError('');
-    const res = await login(data);
+    setIsLoading(true);
 
+    const res = await login(data);
+    setIsLoading(false);
     if (res.success) {
-      if (
-        typeof res.responseObject === 'object' &&
-        res.responseObject !== null
-      ) {
-        setUser(res.responseObject as AuthUserType);
-      } else {
-        console.error('responseObject is not of type AuthUserType');
-      }
+      setUser(res.user as AuthUserType);
       reset();
     } else {
       setAuthError(res.message);
@@ -66,6 +69,7 @@ export default function Login() {
         </div>
       )}
       <form
+        method='POST'
         className='flex w-full max-w-sm flex-col gap-5'
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -83,10 +87,19 @@ export default function Login() {
           register={register}
           errors={errors}
         />
-        <button className='link link-primary self-start font-bold no-underline'>
+        <button
+          type='button'
+          className='link link-primary self-start font-bold no-underline'
+          onClick={() => router.push('/forgot-password')}
+        >
           Forgot Password?
         </button>
-        <button className='btn btn-primary'>Login</button>
+        <button
+          className={`btn btn-primary text-white ${isLoading ? 'btn-neutral' : ''}`}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Logging In...' : 'Login'}
+        </button>
       </form>
     </section>
   );

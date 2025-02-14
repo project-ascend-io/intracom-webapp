@@ -1,15 +1,14 @@
 'use client';
-const app_url = process.env.APP_URL as string;
-const api_url = process.env.NEXT_PUBLIC_API_URL as string;
+const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AdminSignUpForm, AdminSignupFormSchema } from './types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
 
-const SignupUserComplete: React.FC = () => {
+const InstallPage: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -36,12 +35,12 @@ const SignupUserComplete: React.FC = () => {
     instanceUrl,
   }: AdminSignUpForm) => {
     try {
-      const response = await fetch(`${api_url}/users`, {
+      const response = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-
+        cache: 'no-cache',
         body: JSON.stringify({
           email,
           username: userName,
@@ -74,44 +73,25 @@ const SignupUserComplete: React.FC = () => {
   };
 
   return (
-    <div className='flex min-h-screen flex-row items-center justify-center bg-gray-50'>
-      <div className='absolute left-4 top-4 text-blue-600'>
-        <a href='/' className='text-sm'>
-          Back
-        </a>
-      </div>
-      <div className='flex flex-row items-center'>
+    <div className='flex min-h-screen flex-row items-center justify-center bg-gray-50 p-12'>
+      <div className='flex flex-row'>
         <div className='mr-8'>
           <h1 className='mb-2 text-4xl font-bold'>Let’s get started</h1>
           <p className='mb-8 text-gray-600'>
             Create your Intracom account to start collaborating with your team.
           </p>
-          <div>
-            <Image
-              className='lg:ml-72'
-              src='/usersignup.png'
-              alt='usersignup'
-              width={300}
-              height={37}
-            />
-          </div>
         </div>
         <div className='flex flex-col'>
-          <div className='my-4'>
-            <a href='#' className='pl-40 text-sm text-blue-600'>
-              Already have an account? Log in
-            </a>
-          </div>
-
-          <div className='w-full max-w-md rounded-lg bg-white p-8 shadow-md'>
+          <div className='w-full max-w-md rounded-lg bg-white px-8 shadow-md'>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <h1 className='py-4 text-2xl font-bold'>Create your account</h1>
+              <h1 className='py-2 text-xl font-bold'>Create your account</h1>
               <div className='mb-4'>
                 <label className='block text-sm font-medium text-gray-700'>
                   Email address
                 </label>
                 <input
                   type='email'
+                  placeholder='john@foobar.com'
                   className='mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm'
                   {...register('email')}
                 />
@@ -156,9 +136,13 @@ const SignupUserComplete: React.FC = () => {
                 <button
                   type='button'
                   onClick={togglePasswordVisibility}
-                  className='absolute right-3 top-1/2 -translate-y-1/2 transform'
+                  className='absolute'
                 >
-                  {showPassword ? <FiEyeOff /> : <FiEye />}
+                  {showPassword ? (
+                    <FiEyeOff className='relative bottom-[27px] left-[350px]' />
+                  ) : (
+                    <FiEye className='relative bottom-[27px] left-[350px]' />
+                  )}
                 </button>
                 {!errors.password && password && (
                   <label className='mb-4 text-xs text-gray-400'>
@@ -193,6 +177,7 @@ const SignupUserComplete: React.FC = () => {
                 </label>
                 <input
                   type='text'
+                  placeholder='i.e. https://intracom.app'
                   className='mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm'
                   {...register('instanceUrl')}
                 />
@@ -211,20 +196,14 @@ const SignupUserComplete: React.FC = () => {
             </form>
             <p className='mt-4 text-center text-sm text-gray-600'>
               By proceeding to create your account and use Intracom, you agree
-              to our{' '}
-              <a
-                href={`${app_url}/terms-of-use/`}
-                className='text-blue-600 underline'
-              >
+              to our &nbsp;
+              <Link className='text-blue-500 underline' href='/terms-of-use'>
                 Terms of Use
-              </a>{' '}
-              and{' '}
-              <a
-                href={`${app_url}/privacy-policy/`}
-                className='text-blue-600 underline'
-              >
+              </Link>
+              &nbsp; and &nbsp;
+              <Link className='text-blue-500 underline' href='/privacy-policy'>
                 Privacy Policy
-              </a>
+              </Link>
               . If you do not agree, you cannot use Intracom.
             </p>
           </div>
@@ -234,4 +213,4 @@ const SignupUserComplete: React.FC = () => {
   );
 };
 
-export default SignupUserComplete;
+export default InstallPage;

@@ -1,6 +1,8 @@
+'use client';
 import clsx from 'clsx';
 import Image from 'next/image';
 import white_logo from '../assets/white-logo.png';
+import Link from 'next/link';
 
 type FooterLabelProps = {
   children: string;
@@ -65,9 +67,9 @@ const FooterSection = () => {
         </nav>
         <nav className='text-white'>
           <FooterLabel>Legal</FooterLabel>
-          <a className='link-hover link' href='/terms-of-use'>
+          <Link className='link-hover link' href='/terms-of-use'>
             Terms of use
-          </a>
+          </Link>
           <a className='link-hover link' href='/privacy-policy'>
             Privacy policy
           </a>

@@ -72,7 +72,7 @@ export default function DownloadPage() {
               Already have the app?
             </p>
             <button
-              className='btn btn-neutral w-72 rounded-xl p-3 text-white'
+              className='imary btn btn-secondary w-72 rounded-xl p-3'
               onClick={handleOpenApp}
             >
               Open Intracom
@@ -81,6 +81,8 @@ export default function DownloadPage() {
           <div className='hidden lg:block'>
             <Image
               className='rounded-xl'
+              width={200}
+              height={600}
               src='https://picsum.photos/200/600'
               alt='intracom-banner'
             />
