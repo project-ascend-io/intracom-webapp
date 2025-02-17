@@ -8,7 +8,9 @@ const NavLink = ({ label, hyperlink, onClick }: NavLinkProps) => {
   return (
     <>
       <li className='font-semibold text-white'>
-        <a href={hyperlink} onClick={onClick}>{label}</a>
+        <a href={hyperlink} onClick={onClick}>
+          {label}
+        </a>
       </li>
     </>
   );

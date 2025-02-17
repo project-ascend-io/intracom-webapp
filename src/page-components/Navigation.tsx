@@ -14,11 +14,11 @@ const Navigation = () => {
   const logOut = async () => {
     await logout();
     setUser(null!);
-  }
+  };
 
-  let isLoggedIn = !!user;
+  const isLoggedIn = !!user;
 
-  let unauthButtons = (
+  const unauthButtons = (
     <>
       <NavLink label='Login' hyperlink='/login' />
       <li className='ml-4'>
@@ -30,11 +30,11 @@ const Navigation = () => {
         </button>
       </li>
     </>
-  )
+  );
 
-  let authButtons = (
+  const authButtons = (
     <>
-      <NavLink label="Logout" hyperlink='' onClick={logOut} />
+      <NavLink label='Logout' hyperlink='' onClick={logOut} />
       <li className='ml-4'>
         <button
           onClick={() => router.push('/auth/download')}
@@ -44,9 +44,9 @@ const Navigation = () => {
         </button>
       </li>
     </>
-  )
+  );
 
-  let mobileUnauthButtons = (
+  const mobileUnauthButtons = (
     <>
       <li>
         <a href='/login'>Login</a>
@@ -62,9 +62,9 @@ const Navigation = () => {
         </a>
       </li>
     </>
-  )
+  );
 
-  let mobileAuthButtons = (
+  const mobileAuthButtons = (
     <>
       <li>
         <a onClick={logOut}>Logout</a>
@@ -80,8 +80,7 @@ const Navigation = () => {
         </a>
       </li>
     </>
-  )
-
+  );
 
   return (
     <>

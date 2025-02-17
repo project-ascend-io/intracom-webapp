@@ -4,7 +4,6 @@ import { checkSession, logout } from '@/services/auth';
 import { useAuth } from '@/context/auth';
 import { redirect } from 'next/navigation';
 import { AuthUserType } from '@/types/auth';
-import { useRouter } from 'next/navigation';
 
 type Props = {
   children: ReactNode;
