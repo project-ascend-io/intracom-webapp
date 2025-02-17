@@ -39,8 +39,10 @@ const ForgotPasswordPage: React.FC = () => {
         setStatus(message);
       }
     } catch (err) {
-      console.error(err?.toString())
-      setError(err?.toString() + ': Please try again later.')
+      console.error(err?.toString());
+      let message = err?.toString() + ': Please try again later.'
+      message = message.replace('AxiosError: ', '');
+      setError(message)
     }
 
   };
