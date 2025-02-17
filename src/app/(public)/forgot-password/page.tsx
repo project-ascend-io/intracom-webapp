@@ -11,6 +11,7 @@ import { ResponseObject } from '@/types/http';
 
 const ForgotPasswordPage: React.FC = () => {
   const [status, setStatus] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -25,21 +26,36 @@ const ForgotPasswordPage: React.FC = () => {
   }: ForgotPasswordForm) => {
     console.log('Submitted: ', email);
 
-    const response = await AxiosApiInstance.post<ResponseObject>(
-      '/auth/forgot-password',
-      JSON.stringify({ email: email })
-    );
+    try {
+      const response = await AxiosApiInstance.post<ResponseObject>(
+        '/auth/forgot-password',
+        JSON.stringify({ email: email })
+      );
 
-    console.log('Response: ', response);
+      console.log('Response: ', response);
 
-    if (response.status == 200) {
-      const message = response.data.message as string;
-      setStatus(message);
+      if (response.status == 200) {
+        const message = response.data.message as string;
+        setStatus(message);
+      }
+    } catch (err) {
+      console.error(err?.toString())
+      setError(err?.toString() + ': Please try again later.')
     }
+
   };
+
+  const errorMessage = (
+    <>
+      <div role='alert' className='alert alert-error my-4'>
+        {error}
+      </div>
+    </>
+  )
 
   const forgotPasswordForm = (
     <>
+      {error ? errorMessage : ''}
       <form onSubmit={handleSubmit(submitForgotPassword)}>
         <label className='my-4'>Email Address:</label>
         <label className='input input-bordered mt-2 flex items-center gap-2'>
@@ -68,7 +84,7 @@ const ForgotPasswordPage: React.FC = () => {
         <button
           type='submit'
           className='btn btn-primary btn-active mt-4 w-full text-white'
-          disabled={status ? true : false}
+          disabled={status || error ? true : false}
         >
           Submit
         </button>
@@ -105,6 +121,8 @@ const ForgotPasswordPage: React.FC = () => {
       </p>
     </>
   );
+
+
 
   return (
     <>
