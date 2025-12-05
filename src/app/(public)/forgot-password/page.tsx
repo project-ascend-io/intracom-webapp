@@ -40,11 +40,10 @@ const ForgotPasswordPage: React.FC = () => {
       }
     } catch (err) {
       console.error(err?.toString());
-      let message = err?.toString() + ': Please try again later.'
+      let message = err?.toString() + ': Please try again later.';
       message = message.replace('AxiosError: ', '');
-      setError(message)
+      setError(message);
     }
-
   };
 
   const errorMessage = (
@@ -53,7 +52,7 @@ const ForgotPasswordPage: React.FC = () => {
         {error}
       </div>
     </>
-  )
+  );
 
   const forgotPasswordForm = (
     <>
@@ -123,8 +122,6 @@ const ForgotPasswordPage: React.FC = () => {
       </p>
     </>
   );
-
-
 
   return (
     <>

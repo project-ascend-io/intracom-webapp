@@ -31,13 +31,13 @@ export default function AuthLayout({ children }: Props) {
   useEffect(() => {
     if (!user) checkUserSession();
     else setLoading(false);
-  }, []);
+  });
 
   if (loading) return;
 
   const logOut = async () => {
     await logout();
-    setUser(null!);
+    setUser(null as unknown as AuthUserType);
   };
 
   return user ? (

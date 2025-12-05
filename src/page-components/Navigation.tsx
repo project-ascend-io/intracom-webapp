@@ -6,6 +6,7 @@ import { openContributeModal } from '@/components/ContributeModal';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/auth';
 import { logout } from '@/services/auth';
+import { AuthUserType } from '@/types/auth';
 
 const Navigation = () => {
   const { user, setUser } = useAuth();
@@ -13,7 +14,7 @@ const Navigation = () => {
 
   const logOut = async () => {
     await logout();
-    setUser(null!);
+    setUser(null as unknown as AuthUserType);
   };
 
   const isLoggedIn = !!user;
